@@ -1,6 +1,6 @@
 # Noda Plus Website
 
-Официальный сайт Noda Plus с автоматическим деплоем.
+Официальный сайт Noda Plus с автоматическим деплоем через Git.
 
 ## Быстрый старт
 
@@ -15,8 +15,6 @@ python3 -m http.server 8000
 ### Деплой на production
 
 ```bash
-./deploy.sh
-# Или вручную:
 git add .
 git commit -m "Your changes"
 git push production main
@@ -30,32 +28,18 @@ noda_plus_website/
 │   └── index.html       # Главная страница (заглушка)
 ├── caddy/               # Конфигурация Caddy сервера
 │   └── Caddyfile        # Настройки прокси и HTTPS
-├── deploy.sh            # Скрипт быстрого деплоя (не в Git)
-├── deploy.example.sh    # Пример deploy скрипта
-├── DEVELOPMENT.md       # Подробное руководство по разработке
+├── DEVELOPMENT.md       # Подробное руководство
 └── README.md            # Этот файл
 ```
 
-## Как работает деплой?
+## Как работает деплой
 
-```
-Локальная машина                     Production сервер
-────────────────                     ─────────────────
-
-1. Вы редактируете файлы
-   в public/ или caddy/
-
-2. git commit + push       ────────▶  3. Git hook срабатывает
-   production main                       автоматически
-
-                                      4. Файлы копируются в
-                                         /var/www/noda.plus
-
-                                      5. Caddy перезагружается
-
-                                      6. Изменения live на
-                                         https://noda.plus ✅
-```
+При `git push production main` автоматически:
+1. Git hook на сервере срабатывает
+2. Файлы из `public/` копируются в `/var/www/noda.plus/`
+3. `caddy/Caddyfile` копируется в `/etc/caddy/Caddyfile`
+4. Caddy перезагружается
+5. Изменения появляются на https://noda.plus
 
 ## Технологии
 
@@ -77,8 +61,8 @@ noda_plus_website/
 # Проверить статус
 git status
 
-# Быстрый деплой
-./deploy.sh
+# Деплой
+git push production main
 
 # Проверить Caddy на сервере
 ssh noda_plus "systemctl status caddy"
