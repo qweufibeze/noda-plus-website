@@ -1,0 +1,13 @@
+http://noda.plus, http://www.noda.plus {
+    redir https://{host}{uri} permanent
+}
+
+noda.plus, www.noda.plus {
+    root * /var/www/noda.plus
+    file_server
+    encode gzip
+    
+    log {
+        output file /var/log/caddy/noda.plus.log
+    }
+}

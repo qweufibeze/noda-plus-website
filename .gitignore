@@ -1,0 +1,7 @@
+.DS_Store
+.idea/
+*.swp
+*.swo
+*~
+.env
+node_modules/
