@@ -674,8 +674,8 @@ function initSmoothScroll() {
 
                 gsap.to(window, {
                     scrollTo: targetPosition,
-                    duration: 1,
-                    ease: 'power3.inOut'
+                    duration: 0.5,
+                    ease: 'power2.out'
                 });
             }
         });
