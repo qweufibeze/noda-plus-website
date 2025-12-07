@@ -1471,12 +1471,11 @@ input, textarea, select {
 
 .process-line {
     position: absolute;
-    top: 50%;
+    top: calc(50% - 140px);
     left: 0;
     right: 0;
     height: 2px;
     background: linear-gradient(90deg, var(--color-accent-primary) 0%, var(--color-accent-secondary) 50%, var(--color-accent-tertiary) 100%);
-    transform: translateY(-50%);
     z-index: 0;
 }
 
@@ -1500,7 +1499,7 @@ input, textarea, select {
 
 .card-number {
     position: absolute;
-    top: -20px;
+    top: -60px;
     left: 50%;
     transform: translateX(-50%);
     width: 40px;
@@ -1515,6 +1514,17 @@ input, textarea, select {
     font-weight: 700;
     color: white;
     box-shadow: var(--shadow-glow);
+}
+
+.card-number::before {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 20px;
+    background: var(--gradient-primary);
 }
 
 .card-icon {
