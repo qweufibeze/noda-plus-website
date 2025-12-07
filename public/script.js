@@ -569,6 +569,51 @@ function initContactForm() {
         });
     });
 
+    // Phone mask
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+
+            // Always start with 7
+            if (value.length === 0) {
+                value = '7';
+            } else if (value[0] !== '7') {
+                value = '7' + value;
+            }
+
+            let formatted = '+7 (';
+
+            if (value.length > 1) {
+                formatted += value.substring(1, 4);
+            }
+            if (value.length >= 4) {
+                formatted += ') ' + value.substring(4, 7);
+            }
+            if (value.length >= 7) {
+                formatted += '-' + value.substring(7, 9);
+            }
+            if (value.length >= 9) {
+                formatted += '-' + value.substring(9, 11);
+            }
+
+            e.target.value = formatted;
+        });
+
+        phoneInput.addEventListener('focus', () => {
+            if (phoneInput.value === '') {
+                phoneInput.value = '+7 (';
+            }
+        });
+
+        phoneInput.addEventListener('keydown', (e) => {
+            // Prevent deleting +7 (
+            if (e.key === 'Backspace' && phoneInput.value.length <= 4) {
+                e.preventDefault();
+            }
+        });
+    }
+
     // Form submission - show loading state, then submit to FormSubmit
     form.addEventListener('submit', () => {
         const submitBtn = form.querySelector('.form-submit');
