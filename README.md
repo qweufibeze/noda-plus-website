@@ -1,18 +1,23 @@
-# Noda Plus Website
+# Noda+ Website
 
-Официальный сайт Noda Plus с автоматическим деплоем через Git.
+Официальный сайт Noda+ — https://noda.plus
 
-## Быстрый старт
+## Структура проекта
 
-### Локальная разработка
-
-```bash
-cd public
-python3 -m http.server 8000
-# Откройте http://localhost:8000
+```
+noda_plus_website/
+├── public/                 # Файлы сайта (деплоятся на сервер)
+│   ├── index.html          # Главная страница
+│   ├── styles.css          # Стили
+│   ├── script.js           # JavaScript + GSAP анимации
+│   ├── favicon.svg         # Иконка сайта
+│   └── apple-touch-icon.svg
+├── caddy/
+│   └── Caddyfile           # Конфигурация веб-сервера
+└── README.md
 ```
 
-### Деплой на production
+## Деплой
 
 ```bash
 git add .
@@ -20,57 +25,21 @@ git commit -m "Your changes"
 git push production main
 ```
 
-## Структура проекта
+При пуше автоматически:
+1. Файлы из `public/` копируются на сервер
+2. Caddy перезагружается
+3. Изменения появляются на https://noda.plus
 
+## Локальная разработка
+
+```bash
+cd public
+python3 -m http.server 8000
+# Открыть http://localhost:8000
 ```
-noda_plus_website/
-├── public/              # Статические файлы сайта
-│   └── index.html       # Главная страница (заглушка)
-├── caddy/               # Конфигурация Caddy сервера
-│   └── Caddyfile        # Настройки прокси и HTTPS
-├── DEVELOPMENT.md       # Подробное руководство
-└── README.md            # Этот файл
-```
-
-## Как работает деплой
-
-При `git push production main` автоматически:
-1. Git hook на сервере срабатывает
-2. Файлы из `public/` копируются в `/var/www/noda.plus/`
-3. `caddy/Caddyfile` копируется в `/etc/caddy/Caddyfile`
-4. Caddy перезагружается
-5. Изменения появляются на https://noda.plus
 
 ## Технологии
 
-- **Сервер**: Ubuntu 24.04
-- **Веб-сервер**: Caddy 2.10 (с автоматическим HTTPS)
-- **SSL**: Let's Encrypt (автообновление)
-- **Домены**: noda.plus, www.noda.plus
-- **Деплой**: Git hooks (автоматический)
-
-## Полезные ссылки
-
-- **Сайт**: https://noda.plus
-- **Документация**: [DEVELOPMENT.md](DEVELOPMENT.md)
-- **SSH**: `ssh noda_plus`
-
-## Быстрые команды
-
-```bash
-# Проверить статус
-git status
-
-# Деплой
-git push production main
-
-# Проверить Caddy на сервере
-ssh noda_plus "systemctl status caddy"
-
-# Посмотреть логи
-ssh noda_plus "journalctl -u caddy -f"
-```
-
-## Разработка
-
-Подробную информацию о разработке, Git workflow и настройках сервера смотрите в [DEVELOPMENT.md](DEVELOPMENT.md).
+- **Сервер**: Caddy 2 (автоматический HTTPS)
+- **Анимации**: GSAP + ScrollTrigger
+- **Шрифты**: Inter, Poppins
