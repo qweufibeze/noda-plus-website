@@ -1438,11 +1438,12 @@ input, textarea, select {
     position: relative;
     max-width: 800px;
     margin: 0 auto;
+    padding-left: 80px;
 }
 
 .timeline-line {
     position: absolute;
-    left: 50px;
+    left: 60px;
     top: 0;
     bottom: 0;
     width: 2px;
@@ -1461,7 +1462,9 @@ input, textarea, select {
 }
 
 .step-number {
-    width: 100px;
+    position: absolute;
+    left: -80px;
+    width: 40px;
     flex-shrink: 0;
     font-family: var(--font-heading);
     font-size: 1.5rem;
@@ -1470,14 +1473,13 @@ input, textarea, select {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-align: center;
-    position: relative;
+    text-align: right;
 }
 
 .step-number::after {
     content: '';
     position: absolute;
-    right: -16px;
+    right: -26px;
     top: 8px;
     width: 12px;
     height: 12px;
