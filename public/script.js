@@ -304,35 +304,49 @@ function initScrollAnimations() {
         ease: 'power3.out'
     });
 
-    gsap.from('.feature-item', {
-        scrollTrigger: {
-            trigger: '.about-features',
-            start: 'top 80%',
-            once: true
+    gsap.fromTo('.feature-item',
+        {
+            opacity: 0,
+            x: -30
         },
-        opacity: 0,
-        x: -30,
-        duration: 0.6,
-        stagger: 0.15,
-        ease: 'power3.out'
-    });
+        {
+            scrollTrigger: {
+                trigger: '.about-features',
+                start: 'top 80%',
+                once: true
+            },
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            stagger: 0.15,
+            ease: 'power3.out',
+            clearProps: 'all'
+        }
+    );
 
     // Service cards
-    gsap.from('.service-card', {
-        scrollTrigger: {
-            trigger: '.services-grid',
-            start: 'top 70%',
-            once: true
+    gsap.fromTo('.service-card',
+        {
+            opacity: 0,
+            y: 60
         },
-        opacity: 0,
-        y: 60,
-        duration: 0.8,
-        stagger: {
-            amount: 0.6,
-            from: 'start'
-        },
-        ease: 'power3.out'
-    });
+        {
+            scrollTrigger: {
+                trigger: '.services-grid',
+                start: 'top 70%',
+                once: true
+            },
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: {
+                amount: 0.6,
+                from: 'start'
+            },
+            ease: 'power3.out',
+            clearProps: 'all'
+        }
+    );
 
     // Tech items
     gsap.from('.tech-item', {
