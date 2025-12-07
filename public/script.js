@@ -269,7 +269,7 @@ function initScrollAnimations() {
             scrollTrigger: {
                 trigger: header,
                 start: 'top 80%',
-                toggleActions: 'play none none reverse'
+                once: true
             },
             opacity: 0,
             y: 40,
@@ -284,7 +284,7 @@ function initScrollAnimations() {
         scrollTrigger: {
             trigger: '.about-grid',
             start: 'top 70%',
-            toggleActions: 'play none none reverse'
+            once: true
         },
         opacity: 0,
         x: -50,
@@ -296,7 +296,7 @@ function initScrollAnimations() {
         scrollTrigger: {
             trigger: '.about-grid',
             start: 'top 70%',
-            toggleActions: 'play none none reverse'
+            once: true
         },
         opacity: 0,
         x: 50,
@@ -308,7 +308,7 @@ function initScrollAnimations() {
         scrollTrigger: {
             trigger: '.about-features',
             start: 'top 80%',
-            toggleActions: 'play none none reverse'
+            once: true
         },
         opacity: 0,
         x: -30,
@@ -322,7 +322,7 @@ function initScrollAnimations() {
         scrollTrigger: {
             trigger: '.services-grid',
             start: 'top 70%',
-            toggleActions: 'play none none reverse'
+            once: true
         },
         opacity: 0,
         y: 60,
