@@ -349,21 +349,28 @@ function initScrollAnimations() {
     );
 
     // Tech items
-    gsap.from('.tech-item', {
-        scrollTrigger: {
-            trigger: '.tech-content',
-            start: 'top 80%',
-            toggleActions: 'play none none reverse'
+    gsap.fromTo('.tech-panel.active .tech-item',
+        {
+            opacity: 0,
+            scale: 0.8
         },
-        opacity: 0,
-        scale: 0.8,
-        duration: 0.5,
-        stagger: {
-            amount: 0.5,
-            from: 'center'
-        },
-        ease: 'back.out(1.7)'
-    });
+        {
+            scrollTrigger: {
+                trigger: '.tech-content',
+                start: 'top 80%',
+                once: true
+            },
+            opacity: 1,
+            scale: 1,
+            duration: 0.5,
+            stagger: {
+                amount: 0.5,
+                from: 'center'
+            },
+            ease: 'back.out(1.7)',
+            clearProps: 'all'
+        }
+    );
 
     // Portfolio items
     gsap.from('.portfolio-item', {
@@ -453,16 +460,23 @@ function initTechTabs() {
             document.querySelector(`[data-panel="${targetPanel}"]`).classList.add('active');
 
             // Animate new panel items
-            gsap.from(`[data-panel="${targetPanel}"] .tech-item`, {
-                opacity: 0,
-                scale: 0.8,
-                duration: 0.4,
-                stagger: {
-                    amount: 0.3,
-                    from: 'center'
+            gsap.fromTo(`[data-panel="${targetPanel}"] .tech-item`,
+                {
+                    opacity: 0,
+                    scale: 0.8
                 },
-                ease: 'back.out(1.7)'
-            });
+                {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.4,
+                    stagger: {
+                        amount: 0.3,
+                        from: 'center'
+                    },
+                    ease: 'back.out(1.7)',
+                    clearProps: 'all'
+                }
+            );
         });
     });
 }
