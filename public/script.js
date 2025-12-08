@@ -386,32 +386,8 @@ function initScrollAnimations() {
         ease: 'power3.out'
     });
 
-    // Process steps
-    gsap.from('.process-step', {
-        scrollTrigger: {
-            trigger: '.process-timeline',
-            start: 'top 70%',
-            toggleActions: 'play none none reverse'
-        },
-        opacity: 0,
-        x: -40,
-        duration: 0.7,
-        stagger: 0.2,
-        ease: 'power3.out'
-    });
-
-    // Timeline line animation
-    gsap.from('.timeline-line', {
-        scrollTrigger: {
-            trigger: '.process-timeline',
-            start: 'top 70%',
-            toggleActions: 'play none none reverse'
-        },
-        scaleY: 0,
-        transformOrigin: 'top',
-        duration: 1.5,
-        ease: 'power3.out'
-    });
+    // Process timeline animation handled separately
+    initProcessTimeline();
 
     // Contact section
     gsap.from('.contact-info', {
@@ -914,3 +890,53 @@ keyboardStyles.textContent = `
     }
 `;
 document.head.appendChild(keyboardStyles);
+
+// ============================================
+// Process Timeline Animation
+// ============================================
+
+function initProcessTimeline() {
+    const timeline = document.getElementById('process-timeline');
+    const progressLine = document.querySelector('.timeline-line-progress');
+    const steps = document.querySelectorAll('.process-step');
+
+    if (!timeline || !steps.length || window.innerWidth <= 768) return;
+
+    // Create ScrollTrigger for the entire timeline section
+    ScrollTrigger.create({
+        trigger: timeline,
+        start: 'top 80%',
+        end: 'bottom 20%',
+        onUpdate: (self) => {
+            // Update progress line height based on scroll progress
+            const progress = self.progress;
+            if (progressLine) {
+                progressLine.style.height = `${progress * 100}%`;
+            }
+
+            // Activate steps based on scroll position
+            steps.forEach((step, index) => {
+                const stepProgress = (index + 1) / steps.length;
+                const threshold = stepProgress - (1 / steps.length / 2);
+
+                if (progress >= threshold) {
+                    step.classList.add('active');
+                } else {
+                    step.classList.remove('active');
+                }
+            });
+        }
+    });
+
+    // Initial animation for first step
+    ScrollTrigger.create({
+        trigger: timeline,
+        start: 'top 70%',
+        onEnter: () => {
+            if (steps[0]) {
+                steps[0].classList.add('active');
+            }
+        },
+        once: true
+    });
+}

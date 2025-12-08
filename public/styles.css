@@ -1436,95 +1436,243 @@ input, textarea, select {
    ============================================ */
 .process-timeline {
     position: relative;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
-    padding-left: 80px;
+    padding-left: 100px;
 }
 
-.timeline-line {
+/* Timeline Track */
+.timeline-track {
     position: absolute;
-    left: 20px;
+    left: 30px;
     top: 0;
     bottom: 0;
-    width: 2px;
-    background: linear-gradient(180deg, var(--color-accent-primary) 0%, var(--color-accent-secondary) 100%);
+    width: 4px;
+    z-index: 1;
 }
 
+.timeline-line-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background: var(--color-bg-tertiary);
+    border-radius: 2px;
+}
+
+.timeline-line-progress {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 0%;
+    background: var(--gradient-primary);
+    border-radius: 2px;
+    transition: height 0.1s ease-out;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+}
+
+/* Process Step */
 .process-step {
     display: flex;
-    gap: var(--space-2xl);
+    gap: var(--space-xl);
     margin-bottom: var(--space-3xl);
     position: relative;
+    opacity: 0.4;
+    transform: translateX(20px);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .process-step:last-child {
     margin-bottom: 0;
 }
 
+.process-step.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Step Marker - Dot on timeline */
+.step-marker {
+    position: absolute;
+    left: -72px;
+    top: 20px;
+    width: 24px;
+    height: 24px;
+    z-index: 2;
+}
+
+.marker-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+    background: var(--color-bg-tertiary);
+    border: 3px solid var(--color-bg-secondary);
+    border-radius: 50%;
+    transition: all 0.4s ease;
+}
+
+.process-step.active .marker-dot {
+    background: var(--gradient-primary);
+    border-color: var(--color-accent-primary);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+}
+
+.marker-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    background: rgba(139, 92, 246, 0.3);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.process-step.active .marker-pulse {
+    opacity: 1;
+    animation: markerPulse 2s ease-in-out infinite;
+}
+
+@keyframes markerPulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.8);
+        opacity: 0;
+    }
+}
+
+/* Step Number */
 .step-number {
     position: absolute;
-    left: -80px;
-    width: 40px;
-    flex-shrink: 0;
+    left: -100px;
+    top: 14px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: var(--font-heading);
-    font-size: 1.5rem;
+    font-size: 1.125rem;
     font-weight: 700;
+    color: var(--color-text-muted);
+    background: var(--color-bg-secondary);
+    border: 2px solid var(--border-subtle);
+    border-radius: 50%;
+    transition: all 0.4s ease;
+}
+
+.process-step.active .step-number {
+    color: white;
+    background: var(--gradient-primary);
+    border-color: transparent;
+    box-shadow: var(--shadow-glow);
+    transform: scale(1.1);
+}
+
+/* Step Content Card */
+.step-content {
+    flex: 1;
+    padding: var(--space-2xl);
+    background: var(--color-bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.step-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.process-step.active .step-content {
+    background: var(--color-bg-card-hover);
+    border-color: var(--border-medium);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.process-step.active .step-content::before {
+    opacity: 1;
+}
+
+.step-content:hover {
+    transform: translateX(8px);
+}
+
+/* Step Icon */
+.step-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-lg);
+    transition: all 0.4s ease;
+}
+
+.process-step.active .step-icon {
+    background: var(--gradient-primary);
+    border-color: transparent;
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.3);
+}
+
+.step-icon svg {
+    width: 26px;
+    height: 26px;
+    stroke: var(--color-accent-primary);
+    transition: stroke 0.4s ease;
+}
+
+.process-step.active .step-icon svg {
+    stroke: white;
+}
+
+/* Step Title */
+.step-title {
+    font-family: var(--font-heading);
+    font-size: 1.375rem;
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+    transition: color 0.4s ease;
+}
+
+.process-step.active .step-title {
     background: var(--gradient-primary);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-align: right;
 }
 
-.step-number::after {
-    display: none;
-}
-
-.step-content {
-    flex: 1;
-    padding: var(--space-xl);
-    background: var(--color-bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-xl);
-    transition: all var(--transition-base);
-}
-
-.step-content:hover {
-    background: var(--color-bg-card-hover);
-    border-color: var(--border-medium);
-    transform: translateX(8px);
-}
-
-.step-icon {
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--gradient-primary);
-    border-radius: var(--radius-md);
-    margin-bottom: var(--space-lg);
-}
-
-.step-icon svg {
-    width: 24px;
-    height: 24px;
-    stroke: white;
-}
-
-.step-title {
-    font-family: var(--font-heading);
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: var(--space-sm);
-}
-
+/* Step Description */
 .step-description {
     color: var(--color-text-secondary);
     margin-bottom: var(--space-lg);
     font-size: 0.9375rem;
+    line-height: 1.7;
 }
 
+/* Step Deliverables */
 .step-deliverables {
     display: flex;
     flex-wrap: wrap;
@@ -1534,9 +1682,17 @@ input, textarea, select {
 .step-deliverables li {
     font-size: 0.8125rem;
     color: var(--color-text-tertiary);
-    padding: var(--space-xs) var(--space-sm);
+    padding: var(--space-xs) var(--space-md);
     background: rgba(255, 255, 255, 0.05);
-    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-full);
+    transition: all 0.3s ease;
+}
+
+.process-step.active .step-deliverables li {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.3);
+    color: var(--color-text-secondary);
 }
 
 /* ============================================
@@ -2049,22 +2205,52 @@ input, textarea, select {
         padding-left: 0;
     }
 
-    .timeline-line {
+    .timeline-track {
+        display: none;
+    }
+
+    .step-marker {
         display: none;
     }
 
     .process-step {
         flex-direction: column;
         gap: var(--space-md);
+        opacity: 1;
+        transform: none;
     }
 
     .step-number {
-        width: auto;
-        text-align: left;
+        position: relative;
+        left: 0;
+        top: 0;
+        width: 48px;
+        height: 48px;
+        margin-bottom: var(--space-md);
     }
 
-    .step-number::after {
-        display: none;
+    .process-step .step-number {
+        color: white;
+        background: var(--gradient-primary);
+        border-color: transparent;
+    }
+
+    .process-step .step-content {
+        background: var(--color-bg-card-hover);
+        border-color: var(--border-medium);
+    }
+
+    .process-step .step-content::before {
+        opacity: 1;
+    }
+
+    .process-step .step-icon {
+        background: var(--gradient-primary);
+        border-color: transparent;
+    }
+
+    .process-step .step-icon svg {
+        stroke: white;
     }
 
     .review-card {
