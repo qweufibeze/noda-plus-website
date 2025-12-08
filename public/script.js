@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     initParallax();
     initCounterAnimation();
-    initHorizontalProcessScroll();
 });
 
 // ============================================
@@ -387,7 +386,32 @@ function initScrollAnimations() {
         ease: 'power3.out'
     });
 
-    // Process cards animation handled by horizontal scroll
+    // Process steps
+    gsap.from('.process-step', {
+        scrollTrigger: {
+            trigger: '.process-timeline',
+            start: 'top 70%',
+            toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        x: -40,
+        duration: 0.7,
+        stagger: 0.2,
+        ease: 'power3.out'
+    });
+
+    // Timeline line animation
+    gsap.from('.timeline-line', {
+        scrollTrigger: {
+            trigger: '.process-timeline',
+            start: 'top 70%',
+            toggleActions: 'play none none reverse'
+        },
+        scaleY: 0,
+        transformOrigin: 'top',
+        duration: 1.5,
+        ease: 'power3.out'
+    });
 
     // Contact section
     gsap.from('.contact-info', {
@@ -890,95 +914,3 @@ keyboardStyles.textContent = `
     }
 `;
 document.head.appendChild(keyboardStyles);
-
-// ============================================
-// Horizontal Process Scroll
-// ============================================
-
-function initHorizontalProcessScroll() {
-    const processSection = document.querySelector('.process-section');
-    const processHorizontal = document.querySelector('.process-horizontal');
-    const processTrack = document.querySelector('.process-track');
-    const progressBar = document.querySelector('.progress-bar');
-    const progressContainer = document.querySelector('.process-progress');
-
-    if (!processSection || !processTrack || window.innerWidth <= 768) return;
-
-    // Calculate scroll amount
-    const cards = processTrack.querySelectorAll('.process-card');
-    const cardWidth = 320; // Card width
-    const gap = 32; // Gap between cards (var(--space-xl) = 2rem = 32px)
-    const totalWidth = (cardWidth + gap) * cards.length - gap + 64; // +64 for padding
-    const viewportWidth = window.innerWidth;
-    const scrollDistance = totalWidth - viewportWidth + 100;
-
-    // Set initial position
-    gsap.set(processTrack, { x: 100 });
-
-    // Create the horizontal scroll animation
-    const horizontalScroll = gsap.to(processTrack, {
-        x: -scrollDistance,
-        ease: 'none',
-        scrollTrigger: {
-            trigger: processSection,
-            start: 'top top',
-            end: () => `+=${scrollDistance}`,
-            scrub: 1,
-            pin: true,
-            anticipatePin: 1,
-            onEnter: () => {
-                progressContainer.classList.add('visible');
-            },
-            onLeave: () => {
-                progressContainer.classList.remove('visible');
-            },
-            onEnterBack: () => {
-                progressContainer.classList.add('visible');
-            },
-            onLeaveBack: () => {
-                progressContainer.classList.remove('visible');
-            },
-            onUpdate: (self) => {
-                // Update progress bar
-                if (progressBar) {
-                    progressBar.style.width = `${self.progress * 100}%`;
-                }
-            }
-        }
-    });
-
-    // Animate cards appearance
-    cards.forEach((card, index) => {
-        gsap.fromTo(card,
-            {
-                opacity: 0,
-                y: 50
-            },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: processSection,
-                    start: () => `top+=${index * 100} top`,
-                    toggleActions: 'play none none reverse'
-                }
-            }
-        );
-    });
-
-    // Handle resize
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            if (window.innerWidth <= 768) {
-                horizontalScroll.scrollTrigger.kill();
-                gsap.set(processTrack, { x: 0 });
-            } else {
-                ScrollTrigger.refresh();
-            }
-        }, 250);
-    });
-}
