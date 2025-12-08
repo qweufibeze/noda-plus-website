@@ -905,38 +905,37 @@ function initProcessTimeline() {
     // Create ScrollTrigger for the entire timeline section
     ScrollTrigger.create({
         trigger: timeline,
-        start: 'top 80%',
-        end: 'bottom 20%',
+        start: 'top 40%',
+        end: 'bottom 60%',
         onUpdate: (self) => {
             // Update progress line height based on scroll progress
             const progress = self.progress;
             if (progressLine) {
                 progressLine.style.height = `${progress * 100}%`;
             }
-
-            // Activate steps based on scroll position
-            steps.forEach((step, index) => {
-                const stepProgress = (index + 1) / steps.length;
-                const threshold = stepProgress - (1 / steps.length / 2);
-
-                if (progress >= threshold) {
-                    step.classList.add('active');
-                } else {
-                    step.classList.remove('active');
-                }
-            });
         }
     });
 
-    // Initial animation for first step
-    ScrollTrigger.create({
-        trigger: timeline,
-        start: 'top 70%',
-        onEnter: () => {
-            if (steps[0]) {
-                steps[0].classList.add('active');
+    // Create individual triggers for each step - activate when step reaches center of screen
+    steps.forEach((step, index) => {
+        ScrollTrigger.create({
+            trigger: step,
+            start: 'top 55%',
+            end: 'bottom 45%',
+            onEnter: () => step.classList.add('active'),
+            onLeave: () => {
+                // Keep active if it's not the last step
+                if (index < steps.length - 1) {
+                    step.classList.add('active');
+                }
+            },
+            onEnterBack: () => step.classList.add('active'),
+            onLeaveBack: () => {
+                // Remove active only when scrolling back up past it
+                if (index > 0) {
+                    step.classList.remove('active');
+                }
             }
-        },
-        once: true
+        });
     });
 }
