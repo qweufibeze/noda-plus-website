@@ -1554,15 +1554,15 @@ input, textarea, select {
 /* Step Number */
 .step-number {
     position: absolute;
-    left: -100px;
-    top: 14px;
-    width: 44px;
-    height: 44px;
+    left: -106px;
+    top: 8px;
+    width: 56px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-heading);
-    font-size: 1.125rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--color-text-muted);
     background: var(--color-bg-secondary);
