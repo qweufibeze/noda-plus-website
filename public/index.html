@@ -164,7 +164,7 @@
                                             <polyline points="16 18 22 12 16 6"/>
                                             <polyline points="8 6 2 12 8 18"/>
                                         </svg>
-                                        <span>project.ts</span>
+                                        <span>App.swift</span>
                                 </div>
                             </div>
                                 <div class="browser-actions">
@@ -213,55 +213,52 @@
                                         <div class="code-line">
                                             <span class="line-number">1</span>
                                             <span class="code-keyword">import</span>
-                                            <span class="code-text"> { createApp } </span>
-                                            <span class="code-keyword">from</span>
-                                            <span class="code-string"> 'noda'</span>
+                                            <span class="code-text"> SwiftUI</span>
                                         </div>
                                         <div class="code-line">
                                             <span class="line-number">2</span>
                                         </div>
                                         <div class="code-line">
                                             <span class="line-number">3</span>
-                                            <span class="code-keyword">const</span>
-                                            <span class="code-variable"> app</span>
-                                            <span class="code-text"> = </span>
-                                            <span class="code-function">createApp</span>
-                                            <span class="code-text">({</span>
+                                            <span class="code-keyword">struct</span>
+                                            <span class="code-variable"> ContentView</span>
+                                            <span class="code-text">: </span>
+                                            <span class="code-function">View</span>
+                                            <span class="code-text"> {</span>
                                         </div>
                                         <div class="code-line">
                                             <span class="line-number">4</span>
-                                            <span class="code-property">  name</span>
+                                            <span class="code-property">    var</span>
+                                            <span class="code-variable"> body</span>
                                             <span class="code-text">: </span>
-                                            <span class="code-string">'YourProject'</span>
-                                            <span class="code-text">,</span>
-                                        </div>
-                                        <div class="code-line">
-                                            <span class="line-number">5</span>
-                                            <span class="code-property">  version</span>
-                                            <span class="code-text">: </span>
-                                            <span class="code-string">'2.0.0'</span>
-                                            <span class="code-text">,</span>
+                                            <span class="code-keyword">some</span>
+                                            <span class="code-function"> View</span>
+                                            <span class="code-text"> {</span>
                                         </div>
                                         <div class="code-line active">
-                                            <span class="line-number">6</span>
-                                            <span class="code-property">  status</span>
-                                            <span class="code-text">: </span>
-                                            <span class="code-string">'production'</span>
+                                            <span class="line-number">5</span>
+                                            <span class="code-text">        </span>
+                                            <span class="code-function">Text</span>
+                                            <span class="code-text">(</span>
+                                            <span class="code-string">"Hello, Noda+"</span>
+                                            <span class="code-text">)</span>
                                             <span class="code-cursor"></span>
                                         </div>
                                         <div class="code-line">
+                                            <span class="line-number">6</span>
+                                            <span class="code-text">            .</span>
+                                            <span class="code-function">font</span>
+                                            <span class="code-text">(.</span>
+                                            <span class="code-property">largeTitle</span>
+                                            <span class="code-text">)</span>
+                                        </div>
+                                        <div class="code-line">
                                             <span class="line-number">7</span>
-                                            <span class="code-text">})</span>
+                                            <span class="code-text">    }</span>
                                         </div>
                                         <div class="code-line">
                                             <span class="line-number">8</span>
-                                        </div>
-                                        <div class="code-line">
-                                            <span class="line-number">9</span>
-                                            <span class="code-function">app</span>
-                                            <span class="code-text">.</span>
-                                            <span class="code-function">deploy</span>
-                                            <span class="code-text">()</span>
+                                            <span class="code-text">}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -278,11 +275,11 @@
                                 <div class="terminal-content">
                                     <div class="terminal-line success">
                                         <span class="terminal-prefix">✓</span>
-                                        <span>Build completed successfully</span>
+                                        <span>Build Succeeded</span>
                                     </div>
                                     <div class="terminal-line">
                                         <span class="terminal-prefix">→</span>
-                                        <span>Deploying to production...</span>
+                                        <span>Running on iPhone 15 Pro...</span>
                                     </div>
                                 </div>
                             </div>
