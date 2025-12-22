@@ -1402,7 +1402,7 @@ input, textarea, select {
     transition: all var(--transition-slow);
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 580px;
 }
 
 .service-card:hover {
@@ -2719,7 +2719,7 @@ input, textarea, select {
         padding: var(--space-lg);
         display: flex;
         flex-direction: column;
-        height: 100%;
+        min-height: 520px;
     }
     
     .service-icon {
@@ -2935,7 +2935,7 @@ input, textarea, select {
         padding: var(--space-md);
         display: flex;
         flex-direction: column;
-        height: 100%;
+        min-height: 480px;
     }
     
     .service-title {
