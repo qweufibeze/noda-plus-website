@@ -1113,6 +1113,7 @@ input, textarea, select {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-xl);
+    align-items: stretch;
 }
 
 .service-card {
@@ -2440,6 +2441,9 @@ input, textarea, select {
     /* Services Section Mobile */
     .service-card {
         padding: var(--space-lg);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
     }
     
     .service-icon {
@@ -2653,6 +2657,9 @@ input, textarea, select {
     
     .service-card {
         padding: var(--space-md);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
     }
     
     .service-title {
