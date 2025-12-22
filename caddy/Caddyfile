@@ -5,7 +5,49 @@ http://noda.plus, http://www.noda.plus {
 noda.plus, www.noda.plus {
     root * /var/www/noda.plus
     file_server
-    encode gzip
+    
+    # Gzip + Zstd compression
+    encode zstd gzip
+    
+    # ============================================
+    # Aggressive Caching Headers
+    # ============================================
+    
+    # Static assets - 1 year cache (CSS, JS, fonts, images)
+    @static {
+        path *.css *.js *.svg *.png *.jpg *.jpeg *.gif *.webp *.woff *.woff2 *.ttf *.eot *.ico
+    }
+    header @static Cache-Control "public, max-age=31536000, immutable"
+    header @static X-Content-Type-Options "nosniff"
+    
+    # HTML files - short cache with revalidation
+    @html {
+        path *.html /
+    }
+    header @html Cache-Control "public, max-age=3600, must-revalidate"
+    header @html X-Content-Type-Options "nosniff"
+    
+    # ============================================
+    # Security Headers
+    # ============================================
+    header {
+        # Prevent clickjacking
+        X-Frame-Options "SAMEORIGIN"
+        # XSS Protection
+        X-XSS-Protection "1; mode=block"
+        # Referrer Policy
+        Referrer-Policy "strict-origin-when-cross-origin"
+        # Permissions Policy
+        Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    }
+    
+    # ============================================
+    # Performance: Handle missing files gracefully
+    # ============================================
+    handle_errors {
+        rewrite * /index.html
+        file_server
+    }
     
     log {
         output file /var/log/caddy/noda.plus.log
