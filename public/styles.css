@@ -1123,6 +1123,9 @@ input, textarea, select {
     border-radius: var(--radius-xl);
     overflow: hidden;
     transition: all var(--transition-slow);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .service-card:hover {
@@ -1175,6 +1178,7 @@ input, textarea, select {
     color: var(--color-text-secondary);
     margin-bottom: var(--space-lg);
     font-size: 0.9375rem;
+    flex: 1;
 }
 
 .service-features {
