@@ -2530,6 +2530,16 @@ input, textarea, select {
     .terminal {
         height: 100px;
     }
+    
+    /* Tech Showcase Grid Tablet */
+    .tech-showcase-grid {
+        gap: var(--space-sm);
+    }
+    
+    .tech-showcase-icon {
+        width: 40px;
+        height: 40px;
+    }
 
     .tech-tabs {
         flex-wrap: nowrap;
@@ -2762,6 +2772,26 @@ input, textarea, select {
     
     .terminal-content {
         padding: 4px 8px;
+    }
+    
+    /* Tech Showcase Grid Mobile */
+    .tech-showcase-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-sm);
+        padding: var(--space-sm);
+    }
+    
+    .tech-showcase-item {
+        padding: var(--space-sm);
+    }
+    
+    .tech-showcase-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .tech-showcase-name {
+        font-size: 0.65rem;
     }
     
     /* Section Headers Mobile */
