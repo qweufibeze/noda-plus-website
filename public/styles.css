@@ -78,6 +78,91 @@
 }
 
 /* ============================================
+   Light Theme Override
+   ============================================ */
+:root[data-theme="light"] {
+    /* Colors - Light Theme */
+    --color-bg-primary: #f8fafc;
+    --color-bg-secondary: #ffffff;
+    --color-bg-tertiary: #f1f5f9;
+    --color-bg-card: rgba(0, 0, 0, 0.02);
+    --color-bg-card-hover: rgba(0, 0, 0, 0.05);
+
+    --color-text-primary: #0f172a;
+    --color-text-secondary: rgba(15, 23, 42, 0.7);
+    --color-text-tertiary: rgba(15, 23, 42, 0.5);
+    --color-text-muted: rgba(15, 23, 42, 0.35);
+
+    /* Gradient Definitions - Light Theme */
+    --gradient-card: linear-gradient(180deg, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.01) 100%);
+
+    /* Borders - Light Theme */
+    --border-subtle: rgba(0, 0, 0, 0.06);
+    --border-medium: rgba(0, 0, 0, 0.1);
+    --border-strong: rgba(0, 0, 0, 0.15);
+
+    /* Shadows - Light Theme */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.12);
+    --shadow-glow: 0 0 40px rgba(139, 92, 246, 0.15);
+    --shadow-glow-cyan: 0 0 40px rgba(6, 182, 212, 0.15);
+}
+
+/* Light Theme - Component Overrides */
+[data-theme="light"] .browser-frame {
+    background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 100%);
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="light"] .browser-header {
+    background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+}
+
+[data-theme="light"] .browser-url-bar {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+[data-theme="light"] .browser-sidebar {
+    background: #e2e8f0;
+}
+
+[data-theme="light"] .code-main {
+    background: #f8fafc;
+}
+
+[data-theme="light"] .browser-terminal {
+    background: #1e293b;
+}
+
+[data-theme="light"] .terminal-header {
+    background: #0f172a;
+}
+
+[data-theme="light"] .line-number {
+    color: rgba(15, 23, 42, 0.4);
+}
+
+[data-theme="light"] .tech-showcase-item {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(6, 182, 212, 0.08) 100%);
+}
+
+[data-theme="light"] .tech-showcase-item:hover {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%);
+}
+
+[data-theme="light"] .stat-divider {
+    background: var(--border-medium);
+}
+
+[data-theme="light"] .footer {
+    background: var(--color-bg-tertiary);
+}
+
+/* ============================================
    Reset & Base Styles
    ============================================ */
 *, *::before, *::after {
@@ -576,6 +661,75 @@ input, textarea, select {
 
 .mobile-nav-link:hover {
     color: var(--color-accent-primary);
+}
+
+/* ============================================
+   Theme Toggle Button
+   ============================================ */
+.theme-toggle {
+    position: relative;
+    width: 48px;
+    height: 28px;
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: flex;
+    align-items: center;
+    padding: 3px;
+}
+
+.theme-toggle:hover {
+    border-color: var(--color-accent-primary);
+    box-shadow: var(--shadow-glow);
+}
+
+.theme-toggle-slider {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    transition: transform var(--transition-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 3px;
+}
+
+[data-theme="light"] .theme-toggle-slider {
+    transform: translateX(20px);
+}
+
+.theme-toggle-icon {
+    width: 12px;
+    height: 12px;
+    stroke: white;
+    stroke-width: 2;
+    fill: none;
+}
+
+.theme-toggle .icon-sun {
+    display: none;
+}
+
+.theme-toggle .icon-moon {
+    display: block;
+}
+
+[data-theme="light"] .theme-toggle .icon-sun {
+    display: block;
+}
+
+[data-theme="light"] .theme-toggle .icon-moon {
+    display: none;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
 }
 
 /* ============================================
