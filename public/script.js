@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.registerPlugin(ScrollTrigger);
 
     // Initialize all modules
-    initThemeToggle();
     initPreloader();
     initCustomCursor();
     initHeader();

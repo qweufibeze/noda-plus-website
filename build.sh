@@ -21,3 +21,4 @@ echo ""
 echo "File sizes:"
 wc -c styles.css styles.min.css script.js script.min.js | tail -5
 
+
