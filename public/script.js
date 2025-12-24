@@ -27,66 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================================
-// Theme Toggle (Light/Dark Mode)
-// ============================================
-
-function initThemeToggle() {
-    const themeToggle = document.getElementById('theme-toggle');
-    const html = document.documentElement;
-    
-    // Check saved theme or system preference
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    // Apply initial theme
-    if (savedTheme === 'light') {
-        html.setAttribute('data-theme', 'light');
-    } else if (savedTheme === 'dark') {
-        html.removeAttribute('data-theme');
-    } else if (!systemPrefersDark) {
-        // No saved preference, use system preference
-        html.setAttribute('data-theme', 'light');
-    }
-    // Default is dark (no data-theme attribute needed)
-    
-    // Toggle theme on button click
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
-            if (newTheme === 'dark') {
-                html.removeAttribute('data-theme');
-            } else {
-                html.setAttribute('data-theme', newTheme);
-            }
-            
-            // Save preference
-            localStorage.setItem('theme', newTheme);
-            
-            // Animate the toggle
-            gsap.to(themeToggle, {
-                scale: 0.95,
-                duration: 0.1,
-                yoyo: true,
-                repeat: 1
-            });
-        });
-    }
-    
-    // Listen for system theme changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!localStorage.getItem('theme')) {
-            if (e.matches) {
-                html.removeAttribute('data-theme');
-            } else {
-                html.setAttribute('data-theme', 'light');
-            }
-        }
-    });
-}
-
-// ============================================
 // Preloader
 // ============================================
 
