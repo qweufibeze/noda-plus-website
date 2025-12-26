@@ -2858,14 +2858,24 @@ input, textarea, select {
     }
     
     /* About Visual Mobile - fix overflow */
+    .about-grid {
+        overflow: hidden;
+    }
+    
+    .about-content {
+        overflow: hidden;
+    }
+    
     .about-visual {
         max-width: 100%;
         width: 100%;
+        overflow: hidden;
     }
     
     .about-image {
         aspect-ratio: auto;
         min-height: 280px;
+        max-width: 100%;
     }
     
     .about-image-wrapper {
@@ -2874,14 +2884,43 @@ input, textarea, select {
     }
     
     .image-placeholder {
-        padding: var(--space-md);
+        padding: var(--space-sm);
+        overflow: hidden;
+    }
+    
+    /* Tech Showcase - ensure 2 columns fit */
+    .tech-showcase-grid {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .tech-showcase-item {
+        min-width: 0;
     }
     
     /* Feature items - ensure text doesn't overflow */
+    .feature-item {
+        max-width: 100%;
+        overflow: hidden;
+    }
+    
+    .feature-content {
+        max-width: 100%;
+        overflow: hidden;
+    }
+    
     .feature-content p {
         font-size: 0.875rem;
         line-height: 1.5;
         word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    /* About text - fix overflow */
+    .about-text {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
     }
     
     /* Services Section Mobile */
