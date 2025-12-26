@@ -2567,6 +2567,7 @@ input, textarea, select {
     /* Tech Showcase Grid Tablet */
     .tech-showcase-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: repeat(3, 1fr);
         gap: var(--space-sm);
         width: 100%;
         max-width: 100%;
@@ -2938,11 +2939,17 @@ input, textarea, select {
         max-width: 100%;
         box-sizing: border-box;
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: repeat(3, auto);
     }
     
     .tech-showcase-item {
         min-width: 0;
         max-width: 100%;
+    }
+    
+    /* About image - increase height for 3-row grid */
+    .about-image {
+        min-height: 360px;
     }
     
     /* Feature items - ensure text doesn't overflow */
