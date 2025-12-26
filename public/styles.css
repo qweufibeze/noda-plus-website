@@ -2566,7 +2566,16 @@ input, textarea, select {
     
     /* Tech Showcase Grid Tablet */
     .tech-showcase-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: var(--space-sm);
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .tech-showcase-item {
+        min-width: 0;
+        max-width: 100%;
     }
     
     .tech-showcase-icon {
@@ -2959,6 +2968,29 @@ input, textarea, select {
         word-wrap: break-word;
         overflow-wrap: break-word;
         hyphens: auto;
+        max-width: 100%;
+    }
+    
+    /* All paragraphs - prevent overflow */
+    p {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
+    }
+    
+    /* All headings - prevent overflow */
+    h1, h2, h3, h4, h5, h6 {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
+    }
+    
+    /* About grid - force proper layout */
+    .about-grid {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
     }
     
     /* Services Section Mobile */
