@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeroAnimations();
     initScrollAnimations();
     initTechTabs();
-    initReviewsSlider();
     initContactForm();
     initSmoothScroll();
     initParallax();
@@ -454,79 +453,6 @@ function initTechTabs() {
                 }
             );
         });
-    });
-}
-
-// ============================================
-// Reviews Slider
-// ============================================
-
-function initReviewsSlider() {
-    const track = document.getElementById('reviews-track');
-    const cards = document.querySelectorAll('.review-card');
-    const prevBtn = document.getElementById('slider-prev');
-    const nextBtn = document.getElementById('slider-next');
-    const dotsContainer = document.getElementById('slider-dots');
-
-    if (!track || !cards.length) return;
-
-    let currentIndex = 0;
-    const totalSlides = cards.length;
-    const slidesToShow = window.innerWidth > 768 ? 2 : 1;
-    const maxIndex = totalSlides - slidesToShow;
-
-    // Create dots
-    for (let i = 0; i <= maxIndex; i++) {
-        const dot = document.createElement('div');
-        dot.className = `slider-dot ${i === 0 ? 'active' : ''}`;
-        dot.addEventListener('click', () => goToSlide(i));
-        dotsContainer.appendChild(dot);
-    }
-
-    const dots = dotsContainer.querySelectorAll('.slider-dot');
-
-    function goToSlide(index) {
-        currentIndex = Math.max(0, Math.min(index, maxIndex));
-        const cardWidth = cards[0].offsetWidth + parseInt(getComputedStyle(track).gap);
-
-        gsap.to(track, {
-            x: -currentIndex * cardWidth,
-            duration: 0.5,
-            ease: 'power3.out'
-        });
-
-        dots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === currentIndex);
-        });
-    }
-
-    prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
-    nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
-
-    // Auto-slide
-    let autoSlide = setInterval(() => {
-        if (currentIndex >= maxIndex) {
-            goToSlide(0);
-        } else {
-            goToSlide(currentIndex + 1);
-        }
-    }, 5000);
-
-    // Pause on hover
-    track.addEventListener('mouseenter', () => clearInterval(autoSlide));
-    track.addEventListener('mouseleave', () => {
-        autoSlide = setInterval(() => {
-            if (currentIndex >= maxIndex) {
-                goToSlide(0);
-            } else {
-                goToSlide(currentIndex + 1);
-            }
-        }, 5000);
-    });
-
-    // Handle resize
-    window.addEventListener('resize', () => {
-        goToSlide(0);
     });
 }
 
