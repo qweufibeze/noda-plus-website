@@ -1,0 +1,29 @@
+# Robots.txt for noda.plus
+# https://noda.plus/
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://noda.plus/sitemap.xml
+
+# Crawl-delay for politeness (optional)
+Crawl-delay: 1
+
+# Yandex specific
+User-agent: Yandex
+Allow: /
+Crawl-delay: 0.5
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+
+# Block unnecessary files
+Disallow: /*.min.js$
+Disallow: /*.min.css$
+
+# Allow important resources for rendering
+Allow: /styles.min.css
+Allow: /script.min.js
+

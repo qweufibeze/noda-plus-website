@@ -1,0 +1,36 @@
+{
+    "name": "Noda+ — Разработка сайтов и приложений",
+    "short_name": "Noda+",
+    "description": "Веб-студия полного цикла. Разработка сайтов и мобильных приложений под ключ.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0a0a0f",
+    "theme_color": "#8b5cf6",
+    "orientation": "portrait-primary",
+    "lang": "ru",
+    "categories": ["business", "productivity"],
+    "icons": [
+        {
+            "src": "/favicon-16x16.png",
+            "sizes": "16x16",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        },
+        {
+            "src": "/og-image.png",
+            "sizes": "1200x630",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ]
+}
+
