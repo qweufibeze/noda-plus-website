@@ -2619,12 +2619,25 @@ input, textarea, select {
         gap: var(--space-2xl);
     }
     
+    .about-visual {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .about-image {
+        max-width: 100%;
+    }
+    
     .about-features {
         margin-top: var(--space-xl);
     }
     
     .feature-item {
         padding: var(--space-md);
+    }
+    
+    .feature-content p {
+        font-size: 0.9rem;
     }
     
     /* Contact Section Tablet */
@@ -2842,6 +2855,33 @@ input, textarea, select {
         right: 0;
         margin-top: var(--space-xl);
         justify-content: center;
+    }
+    
+    /* About Visual Mobile - fix overflow */
+    .about-visual {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .about-image {
+        aspect-ratio: auto;
+        min-height: 280px;
+    }
+    
+    .about-image-wrapper {
+        max-width: 100%;
+        overflow: hidden;
+    }
+    
+    .image-placeholder {
+        padding: var(--space-md);
+    }
+    
+    /* Feature items - ensure text doesn't overflow */
+    .feature-content p {
+        font-size: 0.875rem;
+        line-height: 1.5;
+        word-wrap: break-word;
     }
     
     /* Services Section Mobile */
