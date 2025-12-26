@@ -2457,7 +2457,8 @@ input, textarea, select {
 
     .about-visual {
         order: -1;
-        max-width: 500px;
+        max-width: 100%;
+        width: 100%;
         margin: 0 auto;
     }
 
@@ -2495,12 +2496,20 @@ input, textarea, select {
 }
 
 @media (max-width: 768px) {
+    /* Prevent horizontal scroll on mobile */
+    html, body {
+        overflow-x: hidden;
+    }
+    
     .container {
         padding: 0 var(--space-md);
+        max-width: 100%;
+        overflow-x: hidden;
     }
 
     .section {
         padding: var(--space-3xl) 0;
+        overflow-x: hidden;
     }
     
     .section-header {
@@ -2876,6 +2885,8 @@ input, textarea, select {
         aspect-ratio: auto;
         min-height: 280px;
         max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
     }
     
     .about-image-wrapper {
@@ -2891,11 +2902,14 @@ input, textarea, select {
     /* Tech Showcase - ensure 2 columns fit */
     .tech-showcase-grid {
         width: 100%;
+        max-width: 100%;
         box-sizing: border-box;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     
     .tech-showcase-item {
         min-width: 0;
+        max-width: 100%;
     }
     
     /* Feature items - ensure text doesn't overflow */
