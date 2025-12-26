@@ -1,4 +1,4 @@
-#!/bin/bash
+зай#!/bin/bash
 # Build script for Noda+ website
 # Minifies CSS and JS files
 
