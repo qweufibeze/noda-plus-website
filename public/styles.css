@@ -1531,12 +1531,16 @@ input, textarea, select {
 /* ============================================
    Tech Stack Section
    ============================================ */
+.tech-tabs-wrapper {
+    position: relative;
+    margin-bottom: var(--space-3xl);
+}
+
 .tech-tabs {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: var(--space-sm);
-    margin-bottom: var(--space-3xl);
 }
 
 .tech-tab {
@@ -2329,14 +2333,37 @@ input, textarea, select {
         height: 40px;
     }
 
+    .tech-tabs-wrapper {
+        position: relative;
+    }
+
+    .tech-tabs-wrapper::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 60px;
+        height: calc(100% - var(--space-sm));
+        background: linear-gradient(to left, var(--color-bg-primary) 0%, transparent 100%);
+        pointer-events: none;
+        z-index: 1;
+    }
+
     .tech-tabs {
         flex-wrap: nowrap;
         overflow-x: auto;
         justify-content: flex-start;
         padding-bottom: var(--space-sm);
         -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding-right: 60px;
     }
-    
+
+    .tech-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
     .tech-tab {
         flex-shrink: 0;
     }
@@ -2800,6 +2827,23 @@ input, textarea, select {
         font-size: 0.75rem;
     }
 
+    .tech-tabs-wrapper {
+        position: relative;
+        margin-bottom: var(--space-2xl);
+    }
+
+    .tech-tabs-wrapper::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 40px;
+        height: calc(100% - var(--space-sm));
+        background: linear-gradient(to left, var(--color-bg-primary) 0%, transparent 100%);
+        pointer-events: none;
+        z-index: 1;
+    }
+
     .tech-tabs {
         gap: var(--space-xs);
         overflow-x: auto;
@@ -2807,11 +2851,20 @@ input, textarea, select {
         justify-content: flex-start;
         flex-wrap: nowrap;
         -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        margin: 0 calc(-1 * var(--space-md));
+        padding-left: var(--space-md);
+        padding-right: 48px;
+    }
+
+    .tech-tabs::-webkit-scrollbar {
+        display: none;
     }
 
     .tech-tab {
-        padding: var(--space-sm) var(--space-md);
-        font-size: 0.75rem;
+        padding: 6px 10px;
+        font-size: 0.6875rem;
         white-space: nowrap;
         flex-shrink: 0;
     }
