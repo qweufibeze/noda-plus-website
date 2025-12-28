@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeader();
     initMobileMenu();
     initHeroAnimations();
+    initHeroMockup();
     initScrollAnimations();
     initTechTabs();
     initContactForm();
@@ -90,7 +91,7 @@ function initCustomCursor() {
     animateCursor();
 
     // Hover effects on interactive elements
-    const hoverElements = document.querySelectorAll('a, button, .service-card, .portfolio-item, .tech-item');
+    const hoverElements = document.querySelectorAll('a, button, .service-card, .tech-item');
 
     hoverElements.forEach(el => {
         el.addEventListener('mouseenter', () => {
@@ -202,7 +203,7 @@ function animateHeroEntrance() {
         stagger: 0.1,
         ease: 'power3.out'
     }, '-=0.3')
-    .from('.hero-phone', {
+    .from('.hero-browser', {
         opacity: 0,
         scale: 0.9,
         duration: 1,
@@ -255,6 +256,185 @@ function createParticles() {
             ease: 'sine.inOut'
         });
     }
+}
+
+// ============================================
+// Hero Mockup Interactivity
+// ============================================
+
+function initHeroMockup() {
+    const codeEditor = document.querySelector('.code-main');
+    const terminal = document.querySelector('.terminal-content');
+    const terminalTabs = document.querySelectorAll('.terminal-tab');
+    const browserControls = document.querySelectorAll('.control-btn');
+    const sidebarIcons = document.querySelectorAll('.sidebar-icon');
+
+    if (!codeEditor) return;
+
+    // Initialize typing animation after preloader
+    setTimeout(() => {
+        initCodeTypingAnimation();
+        initTerminalAnimation();
+    }, 2500);
+
+    // Terminal tab switching
+    terminalTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            terminalTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            // Animate tab switch
+            gsap.fromTo(terminal,
+                { opacity: 0.5, y: 5 },
+                { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }
+            );
+
+            // Change terminal content based on tab
+            if (tab.textContent === 'PROBLEMS') {
+                showProblemsTab();
+            } else {
+                showOutputTab();
+            }
+        });
+    });
+
+    // Browser controls hover effects
+    browserControls.forEach((btn, index) => {
+        btn.addEventListener('mouseenter', () => {
+            gsap.to(btn, {
+                scale: 1.2,
+                duration: 0.2,
+                ease: 'power2.out'
+            });
+        });
+        btn.addEventListener('mouseleave', () => {
+            gsap.to(btn, {
+                scale: 1,
+                duration: 0.2,
+                ease: 'power2.out'
+            });
+        });
+    });
+
+    // Sidebar icons interactivity
+    sidebarIcons.forEach(icon => {
+        icon.addEventListener('click', () => {
+            sidebarIcons.forEach(i => i.classList.remove('active'));
+            icon.classList.add('active');
+
+            gsap.fromTo(icon,
+                { scale: 0.8 },
+                { scale: 1, duration: 0.3, ease: 'back.out(1.7)' }
+            );
+        });
+    });
+}
+
+function initCodeTypingAnimation() {
+    const codeLines = document.querySelectorAll('.code-line');
+    const cursor = document.querySelector('.code-cursor');
+
+    if (!codeLines.length) return;
+
+    // Make cursor blink
+    if (cursor) {
+        gsap.to(cursor, {
+            opacity: 0,
+            duration: 0.5,
+            repeat: -1,
+            yoyo: true,
+            ease: 'steps(1)'
+        });
+    }
+
+    // Animate code lines appearing with typing effect
+    const tl = gsap.timeline({ delay: 0.5 });
+
+    codeLines.forEach((line, index) => {
+        const codeText = line.querySelectorAll('.code-text, .code-keyword, .code-property, .code-string');
+
+        tl.fromTo(line,
+            { opacity: 0.3 },
+            { opacity: 1, duration: 0.1 },
+            index * 0.15
+        );
+
+        codeText.forEach((text, i) => {
+            tl.fromTo(text,
+                { opacity: 0 },
+                { opacity: 1, duration: 0.05 },
+                index * 0.15 + i * 0.03
+            );
+        });
+    });
+
+    // After typing, highlight active line
+    tl.to('.code-line.active', {
+        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+        duration: 0.3,
+        ease: 'power2.out'
+    });
+}
+
+function initTerminalAnimation() {
+    const terminalContent = document.querySelector('.terminal-content');
+    if (!terminalContent) return;
+
+    const originalContent = terminalContent.innerHTML;
+    terminalContent.innerHTML = '';
+
+    const commands = [
+        { type: 'command', text: '$ npm run dev', delay: 0 },
+        { type: 'info', text: 'Starting development server...', delay: 800 },
+        { type: 'success', prefix: '✓', text: 'Compiled successfully!', delay: 1500 },
+        { type: 'info', prefix: '→', text: 'Server running on http://localhost:3000', delay: 2000 },
+        { type: 'info', prefix: '→', text: 'Ready in 1.2s', delay: 2300 }
+    ];
+
+    commands.forEach((cmd, index) => {
+        setTimeout(() => {
+            const line = document.createElement('div');
+            line.className = `terminal-line ${cmd.type}`;
+
+            if (cmd.prefix) {
+                line.innerHTML = `<span class="terminal-prefix">${cmd.prefix}</span><span>${cmd.text}</span>`;
+            } else {
+                line.innerHTML = `<span class="terminal-command">${cmd.text}</span>`;
+            }
+
+            line.style.opacity = '0';
+            terminalContent.appendChild(line);
+
+            gsap.to(line, {
+                opacity: 1,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        }, cmd.delay);
+    });
+}
+
+function showProblemsTab() {
+    const terminalContent = document.querySelector('.terminal-content');
+    if (!terminalContent) return;
+
+    terminalContent.innerHTML = '';
+
+    const line = document.createElement('div');
+    line.className = 'terminal-line success';
+    line.innerHTML = '<span class="terminal-prefix">✓</span><span>No problems detected</span>';
+    line.style.opacity = '0';
+    terminalContent.appendChild(line);
+
+    gsap.to(line, {
+        opacity: 1,
+        duration: 0.3,
+        ease: 'power2.out'
+    });
+}
+
+function showOutputTab() {
+    initTerminalAnimation();
 }
 
 // ============================================
@@ -370,20 +550,6 @@ function initScrollAnimations() {
             clearProps: 'all'
         }
     );
-
-    // Portfolio items
-    gsap.from('.portfolio-item', {
-        scrollTrigger: {
-            trigger: '.portfolio-grid',
-            start: 'top 70%',
-            toggleActions: 'play none none reverse'
-        },
-        opacity: 0,
-        y: 60,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'power3.out'
-    });
 
     // Process timeline animation handled separately
     initProcessTimeline();
@@ -601,8 +767,8 @@ function initParallax() {
         opacity: 0.5
     });
 
-    // Hero phone parallax
-    gsap.to('.hero-phone', {
+    // Hero browser parallax
+    gsap.to('.hero-browser', {
         scrollTrigger: {
             trigger: '.hero',
             start: 'top top',
@@ -694,25 +860,6 @@ document.querySelectorAll('.service-card').forEach(card => {
         gsap.to(card, {
             rotateX: 0,
             rotateY: 0,
-            duration: 0.5,
-            ease: 'power2.out'
-        });
-    });
-});
-
-// Portfolio items hover
-document.querySelectorAll('.portfolio-item').forEach(item => {
-    item.addEventListener('mouseenter', () => {
-        gsap.to(item.querySelector('.portfolio-placeholder'), {
-            scale: 1.05,
-            duration: 0.5,
-            ease: 'power2.out'
-        });
-    });
-
-    item.addEventListener('mouseleave', () => {
-        gsap.to(item.querySelector('.portfolio-placeholder'), {
-            scale: 1,
             duration: 0.5,
             ease: 'power2.out'
         });

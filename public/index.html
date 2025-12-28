@@ -57,9 +57,11 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://mc.yandex.ru">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 
     <!-- Preload critical resources -->
     <link rel="preload" href="styles.min.css" as="style">
@@ -1319,12 +1321,12 @@
 
                             <div class="form-group">
                                 <label for="name" class="form-label">Имя</label>
-                                <input type="text" id="name" name="name" class="form-input" placeholder="Как вас зовут?" required>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="Как вас зовут?" required autocomplete="name">
                             </div>
 
                             <div class="form-group">
                                 <label for="phone" class="form-label">Телефон</label>
-                                <input type="tel" id="phone" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required>
+                                <input type="tel" id="phone" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required autocomplete="tel">
                             </div>
 
                             <div class="form-group">
@@ -1422,15 +1424,23 @@
     <!-- Main Script (deferred) -->
     <script defer src="script.min.js"></script>
 
-    <!-- Yandex.Metrika counter (loaded after page render) -->
+    <!-- Yandex.Metrika counter (deferred until browser idle) -->
     <script type="text/javascript">
-        (function(m,e,t,r,i,k,a){
-            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105731676', 'ym');
-        ym(105731676, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+        function loadYandexMetrika() {
+            (function(m,e,t,r,i,k,a){
+                m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                m[i].l=1*new Date();
+                for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+                k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,k.fetchPriority='low',a.parentNode.insertBefore(k,a)
+            })(window, document,'script','https://mc.yandex.ru/metrika/tag.js', 'ym');
+            ym(105731676, 'init', {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, ecommerce:"dataLayer"});
+        }
+        // Load analytics after page is interactive (3s delay or on idle)
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(loadYandexMetrika, { timeout: 3000 });
+        } else {
+            setTimeout(loadYandexMetrika, 3000);
+        }
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/105731676" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 </body>

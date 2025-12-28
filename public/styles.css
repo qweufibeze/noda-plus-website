@@ -69,8 +69,12 @@
     /* Transitions */
     --transition-fast: 0.15s ease;
     --transition-base: 0.3s ease;
+    --transition-normal: 0.3s ease;
     --transition-slow: 0.5s ease;
     --transition-slower: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* Fonts */
+    --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
 
     /* Layout */
     --container-max: 1280px;
@@ -1029,6 +1033,50 @@ input, textarea, select {
 
 .terminal-prefix {
     color: var(--color-accent-primary);
+}
+
+.terminal-line.command .terminal-command {
+    color: var(--color-accent-secondary);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+.terminal-line.info {
+    color: var(--color-text-secondary);
+}
+
+.terminal-tab {
+    cursor: pointer;
+    transition: var(--transition-fast);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+}
+
+.terminal-tab:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.terminal-tab.active {
+    color: var(--color-text-primary);
+    background: rgba(139, 92, 246, 0.2);
+}
+
+.control-btn {
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.sidebar-icon {
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.sidebar-icon:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+}
+
+.sidebar-icon.active svg {
+    stroke: var(--color-accent-primary);
 }
 
 /* Browser Glow Effect */
@@ -2089,14 +2137,6 @@ input, textarea, select {
     .tech-grid {
         grid-template-columns: repeat(4, 1fr);
     }
-
-    .portfolio-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .portfolio-item.large {
-        grid-column: span 1;
-    }
 }
 
 @media (max-width: 1024px) {
@@ -2299,10 +2339,6 @@ input, textarea, select {
     
     .tech-tab {
         flex-shrink: 0;
-    }
-
-    .portfolio-grid {
-        grid-template-columns: 1fr;
     }
 
     .process-timeline {
