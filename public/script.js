@@ -189,13 +189,6 @@ function animateHeroEntrance() {
         duration: 0.6,
         ease: 'power3.out'
     }, '-=0.4')
-    .from('.hero-actions .btn', {
-        opacity: 0,
-        y: 20,
-        duration: 0.5,
-        stagger: 0.1,
-        ease: 'power3.out'
-    }, '-=0.3')
     .from('.stat-item', {
         opacity: 0,
         y: 20,
