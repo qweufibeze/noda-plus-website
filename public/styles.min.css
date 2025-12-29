@@ -103,6 +103,8 @@ body {
     color: var(--color-text-primary);
     line-height: 1.6;
     overflow-x: hidden;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
 }
 
 body.menu-open {
@@ -2277,19 +2279,20 @@ input, textarea, select {
 
     .section {
         padding: var(--space-3xl) 0;
-        overflow-x: hidden;
+        overflow: clip;
         max-width: 100vw;
+        touch-action: pan-y;
     }
-    
+
     /* About grid and content - prevent overflow */
     .about-grid {
         max-width: 100%;
-        overflow: hidden;
+        overflow: clip;
     }
-    
+
     .about-content {
         max-width: 100%;
-        overflow: hidden;
+        overflow: clip;
     }
     
     .about-text {
@@ -2373,10 +2376,10 @@ input, textarea, select {
         overflow-x: auto;
         justify-content: flex-start;
         padding-bottom: var(--space-sm);
-        -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
         -ms-overflow-style: none;
         padding-right: 60px;
+        touch-action: pan-x pan-y;
     }
 
     .tech-tabs::-webkit-scrollbar {
@@ -2698,19 +2701,19 @@ input, textarea, select {
     
     /* About Visual Mobile - fix overflow */
     .about-grid {
-        overflow: hidden;
+        overflow: clip;
     }
-    
+
     .about-content {
-        overflow: hidden;
+        overflow: clip;
     }
-    
+
     .about-visual {
         max-width: 100%;
         width: 100%;
-        overflow: hidden;
+        overflow: clip;
     }
-    
+
     .about-image {
         aspect-ratio: auto;
         min-height: 280px;
@@ -2718,15 +2721,15 @@ input, textarea, select {
         width: 100%;
         box-sizing: border-box;
     }
-    
+
     .about-image-wrapper {
         max-width: 100%;
-        overflow: hidden;
+        overflow: clip;
     }
-    
+
     .image-placeholder {
         padding: var(--space-sm);
-        overflow: hidden;
+        overflow: clip;
     }
     
     /* Tech Showcase - ensure 2 columns fit */
@@ -2751,12 +2754,12 @@ input, textarea, select {
     /* Feature items - ensure text doesn't overflow */
     .feature-item {
         max-width: 100%;
-        overflow: hidden;
+        overflow: clip;
     }
-    
+
     .feature-content {
         max-width: 100%;
-        overflow: hidden;
+        overflow: clip;
     }
     
     .feature-content p {
@@ -2875,12 +2878,12 @@ input, textarea, select {
         padding-bottom: var(--space-sm);
         justify-content: flex-start;
         flex-wrap: nowrap;
-        -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
         -ms-overflow-style: none;
         margin: 0 calc(-1 * var(--space-md));
         padding-left: var(--space-md);
         padding-right: 48px;
+        touch-action: pan-x pan-y;
     }
 
     .tech-tabs::-webkit-scrollbar {
