@@ -1748,14 +1748,16 @@ input, textarea, select {
     padding-left: 100px;
 }
 
-/* Timeline Track */
+/* Timeline Track - Redesigned Energy Flow */
 .timeline-track {
     position: absolute;
-    left: 30px;
+    left: 28px;
     top: 0;
     bottom: 0;
-    width: 4px;
+    width: 8px;
     z-index: 1;
+    border-radius: 4px;
+    overflow: visible;
 }
 
 .timeline-line-bg {
@@ -1764,8 +1766,34 @@ input, textarea, select {
     top: 0;
     bottom: 0;
     width: 100%;
-    background: var(--color-bg-tertiary);
-    border-radius: 2px;
+    background: linear-gradient(180deg,
+        rgba(139, 92, 246, 0.1) 0%,
+        rgba(99, 102, 241, 0.05) 50%,
+        rgba(6, 182, 212, 0.1) 100%);
+    border-radius: 4px;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    box-shadow:
+        inset 0 0 20px rgba(139, 92, 246, 0.1),
+        0 0 30px rgba(139, 92, 246, 0.05);
+}
+
+/* Энергетические сегменты на фоне */
+.timeline-line-bg::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 15px,
+        rgba(139, 92, 246, 0.3) 15px,
+        rgba(139, 92, 246, 0.3) 20px
+    );
+    border-radius: 1px;
 }
 
 .timeline-line-progress {
@@ -1774,10 +1802,138 @@ input, textarea, select {
     top: 0;
     width: 100%;
     height: 0%;
-    background: var(--gradient-primary);
+    border-radius: 4px;
+    transition: height 0.15s ease-out;
+    overflow: visible;
+    /* Основной градиент с анимацией */
+    background: linear-gradient(180deg,
+        #a855f7 0%,
+        #8b5cf6 25%,
+        #6366f1 50%,
+        #06b6d4 75%,
+        #22d3ee 100%);
+    background-size: 100% 200%;
+    animation: energyFlow 3s ease-in-out infinite;
+}
+
+/* Внутреннее ядро энергии */
+.timeline-line-progress::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0.9) 100%);
     border-radius: 2px;
-    transition: height 0.1s ease-out;
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+    filter: blur(0.5px);
+    animation: coreGlow 2s ease-in-out infinite;
+}
+
+/* Внешнее неоновое свечение */
+.timeline-line-progress::after {
+    content: '';
+    position: absolute;
+    left: -12px;
+    right: -12px;
+    top: -5px;
+    bottom: -5px;
+    background: linear-gradient(180deg,
+        rgba(168, 85, 247, 0.4) 0%,
+        rgba(99, 102, 241, 0.3) 50%,
+        rgba(6, 182, 212, 0.4) 100%);
+    filter: blur(15px);
+    border-radius: 10px;
+    z-index: -1;
+    animation: outerGlow 2.5s ease-in-out infinite alternate;
+}
+
+/* Плавающие частицы энергии */
+.timeline-track::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow:
+        0 0 10px #a855f7,
+        0 0 20px #8b5cf6,
+        0 0 30px #6366f1;
+    z-index: 10;
+    animation: particleFloat 4s ease-in-out infinite;
+    opacity: 0.8;
+}
+
+.timeline-track::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 3px;
+    background: #22d3ee;
+    border-radius: 50%;
+    box-shadow:
+        0 0 8px #06b6d4,
+        0 0 15px #06b6d4;
+    z-index: 10;
+    animation: particleFloat 4s ease-in-out infinite 2s;
+    opacity: 0.7;
+}
+
+@keyframes energyFlow {
+    0%, 100% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 0% 100%;
+    }
+}
+
+@keyframes coreGlow {
+    0%, 100% {
+        opacity: 0.6;
+        filter: blur(0.5px);
+    }
+    50% {
+        opacity: 1;
+        filter: blur(1px);
+    }
+}
+
+@keyframes outerGlow {
+    0% {
+        opacity: 0.5;
+        filter: blur(12px);
+    }
+    100% {
+        opacity: 0.8;
+        filter: blur(18px);
+    }
+}
+
+@keyframes particleFloat {
+    0% {
+        top: 10%;
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        top: 90%;
+        opacity: 0;
+    }
 }
 
 /* Process Step */
@@ -1800,13 +1956,13 @@ input, textarea, select {
     transform: translateX(0);
 }
 
-/* Step Marker - Dot on timeline */
+/* Step Marker - Redesigned Energy Node */
 .step-marker {
     position: absolute;
-    left: -72px;
+    left: -74px;
     top: 20px;
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     z-index: 2;
 }
 
@@ -1815,18 +1971,53 @@ input, textarea, select {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 14px;
-    height: 14px;
-    background: var(--color-bg-tertiary);
-    border: 3px solid var(--color-bg-secondary);
+    width: 16px;
+    height: 16px;
+    background: linear-gradient(135deg,
+        rgba(139, 92, 246, 0.2) 0%,
+        rgba(99, 102, 241, 0.1) 100%);
+    border: 2px solid rgba(139, 92, 246, 0.3);
     border-radius: 50%;
-    transition: all 0.4s ease;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow:
+        inset 0 0 8px rgba(139, 92, 246, 0.2),
+        0 0 10px rgba(139, 92, 246, 0.1);
+}
+
+/* Внутреннее ядро маркера */
+.marker-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4px;
+    height: 4px;
+    background: rgba(139, 92, 246, 0.5);
+    border-radius: 50%;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .process-step.active .marker-dot {
-    background: var(--gradient-primary);
-    border-color: var(--color-accent-primary);
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg,
+        #a855f7 0%,
+        #8b5cf6 50%,
+        #6366f1 100%);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow:
+        0 0 20px rgba(139, 92, 246, 0.8),
+        0 0 40px rgba(139, 92, 246, 0.4),
+        0 0 60px rgba(99, 102, 241, 0.2),
+        inset 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.process-step.active .marker-dot::before {
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    box-shadow: 0 0 10px #fff;
 }
 
 .marker-pulse {
@@ -1834,12 +2025,43 @@ input, textarea, select {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 24px;
-    height: 24px;
-    background: rgba(139, 92, 246, 0.3);
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: 2px solid rgba(139, 92, 246, 0.4);
     border-radius: 50%;
     opacity: 0;
     transition: opacity 0.3s ease;
+}
+
+/* Второй слой пульса */
+.marker-pulse::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 50%;
+    animation: markerPulseOuter 2s ease-in-out infinite 0.3s;
+}
+
+/* Третий слой - свечение */
+.marker-pulse::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle,
+        rgba(139, 92, 246, 0.15) 0%,
+        transparent 70%);
+    border-radius: 50%;
+    animation: markerGlow 2s ease-in-out infinite;
 }
 
 .process-step.active .marker-pulse {
@@ -1850,11 +2072,33 @@ input, textarea, select {
 @keyframes markerPulse {
     0%, 100% {
         transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.6);
+        opacity: 0;
+    }
+}
+
+@keyframes markerPulseOuter {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
         opacity: 0.6;
     }
     50% {
-        transform: translate(-50%, -50%) scale(1.8);
+        transform: translate(-50%, -50%) scale(1.4);
         opacity: 0;
+    }
+}
+
+@keyframes markerGlow {
+    0%, 100% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
     }
 }
 

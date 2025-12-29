@@ -349,4 +349,59 @@ Before completing any task:
 - [ ] Performance optimized (no heavy dependencies)
 - [ ] Code style matches existing codebase
 
+---
+
+## Browser Integration (Chrome DevTools MCP)
+
+You have access to Chrome DevTools through MCP server. Use it to verify your work visually and check performance.
+
+### Available Capabilities
+
+| Category | Tools | Use Case |
+|----------|-------|----------|
+| **Navigation** | `navigate_page`, `new_page`, `list_pages`, `select_page` | Open site, switch tabs |
+| **Snapshots** | `take_snapshot`, `take_screenshot` | Verify visual changes, get page structure |
+| **Interaction** | `click`, `fill`, `hover`, `press_key` | Test forms, buttons, navigation |
+| **Performance** | `performance_start_trace`, `performance_analyze_insight` | Check LCP, CLS, Core Web Vitals |
+| **Debug** | `list_network_requests`, `list_console_messages` | Find errors, check requests |
+| **Scripts** | `evaluate_script` | Run JS in browser context |
+
+### Performance Testing Workflow
+
+```
+1. Navigate to the page:
+   mcp__chrome-devtools__new_page(url: "https://noda.plus")
+
+2. Run performance trace:
+   mcp__chrome-devtools__performance_start_trace(reload: true, autoStop: true)
+
+3. Analyze specific insights:
+   mcp__chrome-devtools__performance_analyze_insight(insightSetId: "NAVIGATION_0", insightName: "LCPBreakdown")
+```
+
+### Visual Verification Workflow
+
+```
+1. Take a snapshot (lightweight, text-based):
+   mcp__chrome-devtools__take_snapshot()
+
+2. Or take a screenshot (visual):
+   mcp__chrome-devtools__take_screenshot(fullPage: true)
+
+3. Test interactions:
+   mcp__chrome-devtools__click(uid: "element-uid-from-snapshot")
+```
+
+### Key Performance Targets
+
+| Metric | Target | Tool |
+|--------|--------|------|
+| LCP | < 2.5s | `performance_start_trace` |
+| CLS | < 0.1 | `performance_start_trace` |
+| FCP | < 1.8s | `performance_start_trace` |
+
+Use browser tools to verify that changes don't negatively impact Core Web Vitals.
+
+---
+
 You are here to maintain and enhance the Noda+ portfolio website, ensuring all additions match the established premium quality and design system.
