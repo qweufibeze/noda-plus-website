@@ -115,6 +115,97 @@ body.loading {
     overflow: hidden;
 }
 
+/* ============================================
+   Custom Scrollbar - Neon Style
+   ============================================ */
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(15, 15, 25, 0.8);
+    border-radius: 10px;
+    border: 1px solid rgba(139, 92, 246, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg,
+        #8b5cf6 0%,
+        #6366f1 25%,
+        #06b6d4 50%,
+        #6366f1 75%,
+        #8b5cf6 100%
+    );
+    background-size: 100% 200%;
+    border-radius: 10px;
+    border: 2px solid rgba(15, 15, 25, 0.8);
+    box-shadow:
+        0 0 10px rgba(139, 92, 246, 0.5),
+        inset 0 0 5px rgba(255, 255, 255, 0.2);
+    animation: scrollbarGradient 3s ease infinite;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg,
+        #a78bfa 0%,
+        #818cf8 25%,
+        #22d3ee 50%,
+        #818cf8 75%,
+        #a78bfa 100%
+    );
+    background-size: 100% 200%;
+    box-shadow:
+        0 0 20px rgba(139, 92, 246, 0.8),
+        0 0 40px rgba(6, 182, 212, 0.4),
+        inset 0 0 10px rgba(255, 255, 255, 0.3);
+    animation: scrollbarGradient 2s ease infinite;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(180deg,
+        #c4b5fd 0%,
+        #a5b4fc 50%,
+        #67e8f9 100%
+    );
+    box-shadow:
+        0 0 30px rgba(139, 92, 246, 1),
+        0 0 60px rgba(6, 182, 212, 0.6);
+}
+
+::-webkit-scrollbar-corner {
+    background: rgba(15, 15, 25, 0.8);
+}
+
+/* Scrollbar gradient animation */
+@keyframes scrollbarGradient {
+    0%, 100% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 0% 100%;
+    }
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #8b5cf6 rgba(15, 15, 25, 0.8);
+}
+
+/* Selection style to match */
+::selection {
+    background: rgba(139, 92, 246, 0.4);
+    color: #fff;
+}
+
+::-moz-selection {
+    background: rgba(139, 92, 246, 0.4);
+    color: #fff;
+}
+
 a {
     color: inherit;
     text-decoration: none;
