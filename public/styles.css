@@ -298,7 +298,7 @@ input, textarea, select {
     height: 3px;
     background: var(--color-bg-tertiary);
     border-radius: var(--radius-full);
-    overflow: hidden;
+    overflow: clip;
 }
 
 .preloader-progress {
@@ -329,7 +329,7 @@ input, textarea, select {
     border-radius: var(--radius-full);
     transition: all var(--transition-base);
     position: relative;
-    overflow: hidden;
+    overflow: clip;
 }
 
 .btn-primary {
@@ -593,7 +593,7 @@ input, textarea, select {
     align-items: center;
     position: relative;
     padding-top: var(--header-height);
-    overflow: hidden;
+    overflow: clip;
 }
 
 /* Hero Background */
@@ -786,8 +786,8 @@ input, textarea, select {
     background: linear-gradient(180deg, #1e1e2e 0%, #0d0d14 100%);
     border-radius: 12px;
     border: 1px solid var(--border-medium);
-    overflow: hidden;
-    box-shadow: 
+    overflow: clip;
+    box-shadow:
         0 25px 50px -12px rgba(0, 0, 0, 0.6),
         0 0 0 1px rgba(255, 255, 255, 0.05),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -936,7 +936,7 @@ input, textarea, select {
     font-family: var(--font-mono);
     font-size: 0.8125rem;
     line-height: 1.6;
-    overflow: hidden;
+    overflow: clip;
 }
 
 .code-line {
@@ -1313,7 +1313,7 @@ input, textarea, select {
     background: var(--gradient-card);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-xl);
-    overflow: hidden;
+    overflow: clip;
 }
 
 .image-placeholder {
@@ -1464,7 +1464,7 @@ input, textarea, select {
     background: var(--color-bg-card);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-xl);
-    overflow: hidden;
+    overflow: clip;
     transition: all var(--transition-slow);
     display: flex;
     flex-direction: column;
@@ -1804,7 +1804,7 @@ input, textarea, select {
     border-radius: var(--radius-xl);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
-    overflow: hidden;
+    overflow: clip;
 }
 
 .step-content::before {
@@ -2260,20 +2260,29 @@ input, textarea, select {
 }
 
 @media (max-width: 768px) {
-    /* Prevent horizontal scroll on mobile */
-    html, body {
+    /* Prevent horizontal scroll and nested scroll containers on mobile */
+    html {
         overflow-x: hidden;
         max-width: 100vw;
+        overscroll-behavior: none;
     }
-    
-    * {
+
+    body {
+        overflow-x: hidden;
+        max-width: 100vw;
+        overscroll-behavior-y: contain;
+    }
+
+    /* Prevent any element from becoming a scroll container (except explicitly allowed) */
+    *:not(.tech-tabs) {
         box-sizing: border-box;
+        overscroll-behavior: contain;
     }
-    
+
     .container {
         padding: 0 var(--space-md);
         max-width: 100%;
-        overflow-x: hidden;
+        overflow: clip;
         box-sizing: border-box;
     }
 
@@ -2282,6 +2291,7 @@ input, textarea, select {
         overflow: clip;
         max-width: 100vw;
         touch-action: pan-y;
+        overscroll-behavior: contain;
     }
 
     /* About grid and content - prevent overflow */
@@ -2342,9 +2352,9 @@ input, textarea, select {
     
     .image-placeholder {
         padding: var(--space-md);
-        overflow: hidden;
+        overflow: clip;
     }
-    
+
     .tech-showcase-item {
         min-width: 0;
         max-width: 100%;
@@ -2374,12 +2384,15 @@ input, textarea, select {
     .tech-tabs {
         flex-wrap: nowrap;
         overflow-x: auto;
+        overflow-y: hidden;
         justify-content: flex-start;
         padding-bottom: var(--space-sm);
         scrollbar-width: none;
         -ms-overflow-style: none;
         padding-right: 60px;
-        touch-action: pan-x pan-y;
+        touch-action: pan-x;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: auto;
     }
 
     .tech-tabs::-webkit-scrollbar {
@@ -2875,6 +2888,7 @@ input, textarea, select {
     .tech-tabs {
         gap: var(--space-xs);
         overflow-x: auto;
+        overflow-y: hidden;
         padding-bottom: var(--space-sm);
         justify-content: flex-start;
         flex-wrap: nowrap;
@@ -2883,7 +2897,9 @@ input, textarea, select {
         margin: 0 calc(-1 * var(--space-md));
         padding-left: var(--space-md);
         padding-right: 48px;
-        touch-action: pan-x pan-y;
+        touch-action: pan-x;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: auto;
     }
 
     .tech-tabs::-webkit-scrollbar {
