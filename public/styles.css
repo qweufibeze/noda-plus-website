@@ -866,10 +866,26 @@ input, textarea, select {
     align-items: center;
 }
 
-/* Browser Window Visual */
+/* Vanta.js 3D Globe Container - Full Screen */
+.vanta-globe-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.vanta-globe-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Browser Window Visual (legacy - kept for reference) */
 .hero-browser {
     position: relative;
     z-index: 2;
+    display: none;
 }
 
 .browser-frame {
@@ -1601,6 +1617,12 @@ input, textarea, select {
     stroke: white;
 }
 
+.service-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
 .service-title {
     font-family: var(--font-heading);
     font-size: 1.5rem;
@@ -1619,6 +1641,7 @@ input, textarea, select {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm);
+    margin-top: auto;
 }
 
 .service-features li {
@@ -2539,13 +2562,19 @@ input, textarea, select {
         margin-top: var(--space-3xl);
         padding: 0 var(--space-md);
     }
-    
+
+    .vanta-globe-container {
+        width: 100%;
+        max-width: 400px;
+        height: 400px;
+    }
+
     .browser-frame {
         width: 100%;
         max-width: 500px;
         font-size: 0.85em;
     }
-    
+
     .floating-elements {
         display: none;
     }
@@ -3435,5 +3464,128 @@ input, textarea, select {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+}
+
+/* ============================================
+   Custom Cursor - Neon Glow Effect
+   ============================================ */
+
+/* Hide default cursor on desktop */
+@media (hover: hover) and (pointer: fine) {
+    * {
+        cursor: none !important;
+    }
+
+    a, button, [role="button"], input, textarea, select, label {
+        cursor: none !important;
+    }
+}
+
+/* Custom cursor container */
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+    z-index: 99999;
+    mix-blend-mode: difference;
+    transition: transform 0.1s ease-out, opacity 0.3s ease;
+    will-change: transform;
+}
+
+/* Inner dot */
+.cursor-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    box-shadow:
+        0 0 10px rgba(139, 92, 246, 0.8),
+        0 0 20px rgba(6, 182, 212, 0.6),
+        0 0 30px rgba(139, 92, 246, 0.4);
+}
+
+/* Outer ring with glow */
+.cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    pointer-events: none;
+    z-index: 99998;
+    transition: transform 0.15s ease-out, width 0.2s ease, height 0.2s ease, opacity 0.3s ease;
+    will-change: transform;
+}
+
+.cursor-ring::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(139, 92, 246, 0.5);
+    border-radius: 50%;
+    box-shadow:
+        0 0 15px rgba(139, 92, 246, 0.3),
+        inset 0 0 15px rgba(6, 182, 212, 0.1);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover state - cursor expands */
+.custom-cursor.is-hovering {
+    transform: scale(1.5);
+}
+
+.cursor-ring.is-hovering {
+    width: 60px;
+    height: 60px;
+}
+
+.cursor-ring.is-hovering::before {
+    border-color: rgba(6, 182, 212, 0.8);
+    box-shadow:
+        0 0 20px rgba(6, 182, 212, 0.5),
+        0 0 40px rgba(139, 92, 246, 0.3),
+        inset 0 0 20px rgba(6, 182, 212, 0.2);
+}
+
+/* Click state - cursor pulses */
+.custom-cursor.is-clicking .cursor-dot {
+    transform: translate(-50%, -50%) scale(0.8);
+}
+
+.cursor-ring.is-clicking::before {
+    transform: translate(-50%, -50%) scale(0.9);
+    border-color: rgba(236, 72, 153, 0.8);
+    box-shadow:
+        0 0 25px rgba(236, 72, 153, 0.6),
+        0 0 50px rgba(139, 92, 246, 0.4);
+}
+
+/* Hidden when outside viewport or on touch devices */
+.custom-cursor.is-hidden,
+.cursor-ring.is-hidden {
+    opacity: 0;
+}
+
+/* Disable custom cursor on touch devices */
+@media (hover: none) or (pointer: coarse) {
+    .custom-cursor,
+    .cursor-ring {
+        display: none !important;
+    }
+
+    * {
+        cursor: auto !important;
+    }
 }
 

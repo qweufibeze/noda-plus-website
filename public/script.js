@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeader();
     initMobileMenu();
     initHeroAnimations();
-    initHeroMockup();
+    initVantaGlobe();
     initScrollAnimations();
     initTechTabs();
     initContactForm();
@@ -50,62 +50,91 @@ function initPreloader() {
 // ============================================
 
 function initCustomCursor() {
-    const cursor = document.getElementById('cursor');
-    const follower = document.getElementById('cursor-follower');
+    const cursor = document.getElementById('custom-cursor');
+    const ring = document.getElementById('cursor-ring');
 
-    if (!cursor || !follower) return;
+    if (!cursor || !ring) return;
 
-    // Check if touch device
-    if ('ontouchstart' in window) return;
+    // Check if touch device or no fine pointer
+    if ('ontouchstart' in window || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        cursor.style.display = 'none';
+        ring.style.display = 'none';
+        return;
+    }
 
     let mouseX = 0;
     let mouseY = 0;
     let cursorX = 0;
     let cursorY = 0;
-    let followerX = 0;
-    let followerY = 0;
+    let ringX = 0;
+    let ringY = 0;
+    let isVisible = false;
 
+    // Mouse move handler
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
 
-        cursor.classList.add('visible');
-        follower.classList.add('visible');
+        if (!isVisible) {
+            cursor.classList.remove('is-hidden');
+            ring.classList.remove('is-hidden');
+            isVisible = true;
+        }
     });
 
     // Smooth cursor animation
     function animateCursor() {
-        // Cursor follows immediately
-        cursorX += (mouseX - cursorX) * 0.5;
-        cursorY += (mouseY - cursorY) * 0.5;
+        // Cursor follows quickly
+        cursorX += (mouseX - cursorX) * 0.35;
+        cursorY += (mouseY - cursorY) * 0.35;
 
-        // Follower follows with delay
-        followerX += (mouseX - followerX) * 0.15;
-        followerY += (mouseY - followerY) * 0.15;
+        // Ring follows with more delay for smooth effect
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
 
-        cursor.style.transform = `translate(${cursorX - 4}px, ${cursorY - 4}px)`;
-        follower.style.transform = `translate(${followerX - 20}px, ${followerY - 20}px)`;
+        cursor.style.transform = `translate(${cursorX - 6}px, ${cursorY - 6}px)`;
+        ring.style.transform = `translate(${ringX - 20}px, ${ringY - 20}px)`;
 
         requestAnimationFrame(animateCursor);
     }
     animateCursor();
 
     // Hover effects on interactive elements
-    const hoverElements = document.querySelectorAll('a, button, .service-card, .tech-item');
+    const hoverElements = document.querySelectorAll('a, button, [role="button"], input, textarea, select, .service-card, .tech-item, .tech-showcase-item, .process-card');
 
     hoverElements.forEach(el => {
         el.addEventListener('mouseenter', () => {
-            follower.classList.add('hover');
+            cursor.classList.add('is-hovering');
+            ring.classList.add('is-hovering');
         });
         el.addEventListener('mouseleave', () => {
-            follower.classList.remove('hover');
+            cursor.classList.remove('is-hovering');
+            ring.classList.remove('is-hovering');
         });
+    });
+
+    // Click effects
+    document.addEventListener('mousedown', () => {
+        cursor.classList.add('is-clicking');
+        ring.classList.add('is-clicking');
+    });
+
+    document.addEventListener('mouseup', () => {
+        cursor.classList.remove('is-clicking');
+        ring.classList.remove('is-clicking');
     });
 
     // Hide cursor when leaving window
     document.addEventListener('mouseleave', () => {
-        cursor.classList.remove('visible');
-        follower.classList.remove('visible');
+        cursor.classList.add('is-hidden');
+        ring.classList.add('is-hidden');
+        isVisible = false;
+    });
+
+    document.addEventListener('mouseenter', () => {
+        cursor.classList.remove('is-hidden');
+        ring.classList.remove('is-hidden');
+        isVisible = true;
     });
 }
 
@@ -252,7 +281,65 @@ function createParticles() {
 }
 
 // ============================================
-// Hero Mockup Interactivity
+// Vanta.js 3D Globe Animation
+// ============================================
+
+function initVantaGlobe() {
+    const globeContainer = document.getElementById('vanta-globe');
+
+    if (!globeContainer) {
+        console.warn('Globe container not found');
+        return;
+    }
+
+    // Wait for VANTA to load (it loads asynchronously)
+    function tryInitVanta() {
+        if (typeof VANTA !== 'undefined' && VANTA.GLOBE) {
+            // Initialize VANTA GLOBE effect
+            window.vantaEffect = VANTA.GLOBE({
+                el: globeContainer,
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                // Colors matching Noda+ brand (purple/cyan theme)
+                color: 0x8b5cf6,        // Primary purple
+                color2: 0x06b6d4,       // Secondary cyan
+                backgroundColor: 0x0a0a0f, // Background matches site
+                // Globe settings
+                size: 1.20,
+                points: 10.00,
+                maxDistance: 20.00,
+                spacing: 15.00
+            });
+        } else {
+            // Retry after 100ms
+            setTimeout(tryInitVanta, 100);
+        }
+    }
+
+    tryInitVanta();
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        if (window.vantaEffect) {
+            window.vantaEffect.resize();
+        }
+    });
+
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', () => {
+        if (window.vantaEffect) {
+            window.vantaEffect.destroy();
+        }
+    });
+}
+
+// ============================================
+// Hero Mockup Interactivity (Legacy - kept for reference)
 // ============================================
 
 function initHeroMockup() {
