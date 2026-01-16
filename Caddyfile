@@ -9,8 +9,8 @@ noda.plus, www.noda.plus {
     root * /var/www/noda.plus
     file_server
 
-    # Compression: Brotli + Gzip
-    encode br gzip
+    # Compression: Gzip
+    encode gzip
 
     # Security headers
     header {
