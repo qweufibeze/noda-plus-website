@@ -1,47 +1,69 @@
-# Optimized Caddy configuration for noda.plus
+# Secure & Optimized Caddy configuration for noda.plus
 
 noda.plus, www.noda.plus {
     # Redirect www to non-www
     @www host www.noda.plus
     redir @www https://noda.plus{uri} permanent
 
+    # Block access to sensitive/hidden files
+    @blocked {
+        path /.* /.*/* *.sql *.bak *.old *.log *.ini *.conf
+        path /wp-* /xmlrpc* /admin* /phpinfo* /server-status*
+    }
+    respond @blocked 404
+
     # Serve static files
     root * /var/www/noda.plus
     file_server
 
-    # Compression: Gzip
+    # Compression
     encode gzip
 
     # Security headers
     header {
+        # Basic security
         X-Content-Type-Options "nosniff"
         X-Frame-Options "SAMEORIGIN"
-        X-XSS-Protection "1; mode=block"
         Referrer-Policy "strict-origin-when-cross-origin"
-        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-        Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+        # HSTS with preload
+        Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+
+        # Permissions Policy (disable unused features)
+        Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()"
+
+        # Cross-Origin policies
+        Cross-Origin-Opener-Policy "same-origin-allow-popups"
+        Cross-Origin-Resource-Policy "same-origin"
+        X-Permitted-Cross-Domain-Policies "none"
+
+        # Content Security Policy
+        Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://mc.yandex.ru https://yastatic.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://mc.yandex.ru https://mc.yandex.com; frame-src https://mc.yandex.ru; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io; upgrade-insecure-requests"
+
+        # Remove server identification
         -Server
+        -X-Powered-By
     }
 
-    # Aggressive caching for CSS/JS (1 year)
+    # Caching for CSS/JS (1 year, immutable)
     @static {
         path *.css *.js *.woff *.woff2 *.ttf *.eot
     }
     header @static Cache-Control "public, max-age=31536000, immutable"
 
-    # Long cache for images (30 days)
+    # Caching for images (30 days)
     @images {
         path *.png *.jpg *.jpeg *.gif *.webp *.avif *.svg *.ico
     }
     header @images Cache-Control "public, max-age=2592000"
 
-    # Short cache for HTML (10 minutes)
+    # Short cache for HTML (10 min)
     @html {
         path *.html /
     }
     header @html Cache-Control "public, max-age=600"
 
-    # Handle SPA routing
+    # Handle SPA routing (only for non-blocked paths)
     try_files {path} /index.html
 
     # Logging
