@@ -30,6 +30,23 @@
     overflow: hidden;
 }
 
+/* Page Hero with Vanta Animation */
+.page-hero-with-vanta {
+    min-height: 500px;
+}
+
+.vanta-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.8;
+    mask-image: linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
+}
+
 .page-hero::before {
     content: '';
     position: absolute;
@@ -157,6 +174,17 @@
 @media (max-width: 768px) {
     .page-hero {
         padding: 140px 0 60px;
+    }
+
+    .page-hero-with-vanta {
+        min-height: 400px;
+    }
+
+    .vanta-bg {
+        width: 100%;
+        opacity: 0.4;
+        mask-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 100%);
+        -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 100%);
     }
 
     .page-hero-title {

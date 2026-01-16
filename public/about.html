@@ -71,6 +71,10 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 
+    <!-- Vanta.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.trunk.min.js"></script>
+
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
     {
@@ -141,7 +145,8 @@
 
     <main>
         <!-- Page Hero -->
-        <section class="page-hero">
+        <section class="page-hero page-hero-with-vanta">
+            <div class="vanta-bg" id="vanta-trunk"></div>
             <div class="container">
                 <div class="page-hero-content">
                     <span class="section-label">О компании</span>
@@ -384,5 +389,27 @@
 
     <!-- Main Script -->
     <script defer src="script.min.js?v=9"></script>
+
+    <!-- Vanta Trunk Init -->
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            if (typeof VANTA !== 'undefined') {
+                VANTA.TRUNK({
+                    el: "#vanta-trunk",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: false,
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    color: 0x6366f1,
+                    backgroundColor: 0x0a0a0f,
+                    spacing: 2.00,
+                    chaos: 3.00
+                });
+            }
+        });
+    </script>
 </body>
 </html>
