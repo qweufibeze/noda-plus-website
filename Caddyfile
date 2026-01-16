@@ -20,18 +20,19 @@ noda.plus, www.noda.plus {
         -X-Powered-By
     }
 
-    # Block sensitive files FIRST (before file_server)
-    @blocked {
-        path_regexp ^/\..* ^/.*\.sql$ ^/.*\.bak$ ^/.*\.old$ ^/.*\.log$ ^/.*\.ini$ ^/.*\.conf$
+    # Block dotfiles (like .git, .env, .htaccess)
+    @dotfiles {
+        path_regexp dotfile ^/\.
     }
-    handle @blocked {
+    handle @dotfiles {
         respond 404
     }
 
-    @wordpress {
-        path /wp-* /xmlrpc* /admin* /phpinfo* /server-status*
+    # Block common attack paths
+    @blocked {
+        path /wp-* /xmlrpc* /admin* /phpinfo* /server-status* *.sql *.bak
     }
-    handle @wordpress {
+    handle @blocked {
         respond 404
     }
 
