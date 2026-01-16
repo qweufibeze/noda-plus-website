@@ -71,9 +71,9 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 
-    <!-- Vanta.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.halo.min.js"></script>
+    <!-- Vanta.js (local) -->
+    <script src="js/three.min.js"></script>
+    <script src="js/vanta.trunk.min.js"></script>
 
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -390,12 +390,12 @@
     <!-- Main Script -->
     <script defer src="script.min.js?v=9"></script>
 
-    <!-- Vanta Halo Init -->
+    <!-- Vanta Trunk Init -->
     <script>
         window.addEventListener('load', function() {
             function initVanta() {
                 if (typeof VANTA !== 'undefined' && typeof THREE !== 'undefined') {
-                    VANTA.HALO({
+                    VANTA.TRUNK({
                         el: "#vanta-trunk",
                         THREE: THREE,
                         mouseControls: true,
@@ -403,12 +403,12 @@
                         gyroControls: false,
                         minHeight: 200.00,
                         minWidth: 200.00,
+                        scale: 1.00,
+                        scaleMobile: 1.00,
+                        color: 0xa855f7,
                         backgroundColor: 0x0a0a0f,
-                        baseColor: 0x6366f1,
-                        size: 1.5,
-                        amplitudeFactor: 1.5,
-                        xOffset: 0.25,
-                        yOffset: 0.0
+                        spacing: 0.50,
+                        chaos: 1.50
                     });
                 } else {
                     setTimeout(initVanta, 100);
