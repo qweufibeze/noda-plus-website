@@ -1,5 +1,4 @@
 # Optimized Caddy configuration for noda.plus
-# Performance-tuned for static site
 
 noda.plus, www.noda.plus {
     # Redirect www to non-www
@@ -8,17 +7,10 @@ noda.plus, www.noda.plus {
 
     # Serve static files
     root * /var/www/noda.plus
-    file_server {
-        precompressed br gzip
-    }
+    file_server
 
-    # Compression: Brotli (best) + Gzip fallback
-    encode {
-        zstd
-        br
-        gzip
-        minimum_length 256
-    }
+    # Compression: Brotli + Gzip
+    encode br gzip
 
     # Security headers
     header {
@@ -28,47 +20,33 @@ noda.plus, www.noda.plus {
         Referrer-Policy "strict-origin-when-cross-origin"
         Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
         Permissions-Policy "geolocation=(), microphone=(), camera=()"
-        # Remove server identification
         -Server
     }
 
-    # Aggressive caching for immutable assets (1 year)
-    @immutable {
+    # Aggressive caching for CSS/JS (1 year)
+    @static {
         path *.css *.js *.woff *.woff2 *.ttf *.eot
     }
-    header @immutable {
-        Cache-Control "public, max-age=31536000, immutable"
-    }
+    header @static Cache-Control "public, max-age=31536000, immutable"
 
     # Long cache for images (30 days)
     @images {
         path *.png *.jpg *.jpeg *.gif *.webp *.avif *.svg *.ico
     }
-    header @images {
-        Cache-Control "public, max-age=2592000, stale-while-revalidate=86400"
-    }
+    header @images Cache-Control "public, max-age=2592000"
 
-    # Short cache for HTML (10 minutes with revalidation)
+    # Short cache for HTML (10 minutes)
     @html {
         path *.html /
     }
-    header @html {
-        Cache-Control "public, max-age=600, stale-while-revalidate=3600"
-    }
-
-    # Preload critical resources for main page
-    header / {
-        Link "</styles.min.css>; rel=preload; as=style"
-        Link "</script.min.js>; rel=preload; as=script"
-    }
+    header @html Cache-Control "public, max-age=600"
 
     # Handle SPA routing
     try_files {path} /index.html
 
-    # Logging (minimal for performance)
+    # Logging
     log {
         output stdout
         format console
-        level ERROR
     }
 }

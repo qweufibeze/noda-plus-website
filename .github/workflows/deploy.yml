@@ -34,4 +34,4 @@ jobs:
 
           sshpass -e ssh -o StrictHostKeyChecking=no \
             ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} \
-            'caddy fmt --overwrite /etc/caddy/Caddyfile && systemctl reload caddy'
+            'caddy validate --config /etc/caddy/Caddyfile && caddy fmt --overwrite /etc/caddy/Caddyfile && systemctl reload caddy'
