@@ -23,3 +23,11 @@ jobs:
             -e "ssh -o StrictHostKeyChecking=no" \
             public/ \
             ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/var/www/noda.plus/
+
+      - name: Setup and reload Caddy
+        env:
+          SSHPASS: ${{ secrets.SERVER_PASSWORD }}
+        run: |
+          sshpass -e ssh -o StrictHostKeyChecking=no \
+            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} \
+            'ls -la /var/www/noda.plus/ && systemctl status caddy --no-pager || true'
