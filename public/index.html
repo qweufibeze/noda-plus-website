@@ -493,5 +493,39 @@
         }
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/105731676" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+    <!-- Cookie Consent Banner -->
+    <div class="cookie-banner" id="cookie-banner">
+        <div class="cookie-banner-content">
+            <div class="cookie-banner-text">
+                <p>Мы используем файлы cookie для улучшения работы сайта и анализа трафика в соответствии с <a href="https://www.consultant.ru/document/cons_doc_LAW_61801/" target="_blank" rel="noopener">ФЗ-152 «О персональных данных»</a>. Продолжая использовать сайт, вы соглашаетесь с использованием cookie.</p>
+            </div>
+            <div class="cookie-banner-actions">
+                <button class="cookie-btn cookie-btn-accept" id="cookie-accept">Принять</button>
+                <button class="cookie-btn cookie-btn-decline" id="cookie-decline">Отклонить</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            const banner = document.getElementById('cookie-banner');
+            const acceptBtn = document.getElementById('cookie-accept');
+            const declineBtn = document.getElementById('cookie-decline');
+
+            if (!localStorage.getItem('cookieConsent')) {
+                setTimeout(() => banner.classList.add('visible'), 1000);
+            }
+
+            acceptBtn.addEventListener('click', () => {
+                localStorage.setItem('cookieConsent', 'accepted');
+                banner.classList.remove('visible');
+            });
+
+            declineBtn.addEventListener('click', () => {
+                localStorage.setItem('cookieConsent', 'declined');
+                banner.classList.remove('visible');
+            });
+        })();
+    </script>
 </body>
 </html>
