@@ -73,7 +73,7 @@
 
     <!-- Vanta.js (local) -->
     <script src="js/three.min.js"></script>
-    <script src="js/vanta.topology.min.js"></script>
+    <script src="js/vanta.halo.min.js"></script>
 
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -390,12 +390,12 @@
     <!-- Main Script -->
     <script defer src="script.min.js?v=9"></script>
 
-    <!-- Vanta Topology Init -->
+    <!-- Vanta Halo Init -->
     <script>
         window.addEventListener('load', function() {
             function initVanta() {
                 if (typeof VANTA !== 'undefined' && typeof THREE !== 'undefined') {
-                    VANTA.TOPOLOGY({
+                    VANTA.HALO({
                         el: "#vanta-trunk",
                         THREE: THREE,
                         mouseControls: true,
@@ -403,10 +403,12 @@
                         gyroControls: false,
                         minHeight: 200.00,
                         minWidth: 200.00,
-                        scale: 1.00,
-                        scaleMobile: 1.00,
-                        color: 0xa855f7,
-                        backgroundColor: 0x0a0a0f
+                        backgroundColor: 0x0a0a0f,
+                        baseColor: 0x6366f1,
+                        size: 1.2,
+                        amplitudeFactor: 1.2,
+                        xOffset: 0.0,
+                        yOffset: 0.0
                     });
                 } else {
                     setTimeout(initVanta, 100);
