@@ -392,23 +392,29 @@
 
     <!-- Vanta Trunk Init -->
     <script>
-        window.addEventListener('DOMContentLoaded', function() {
-            if (typeof VANTA !== 'undefined') {
-                VANTA.TRUNK({
-                    el: "#vanta-trunk",
-                    mouseControls: true,
-                    touchControls: true,
-                    gyroControls: false,
-                    minHeight: 200.00,
-                    minWidth: 200.00,
-                    scale: 1.00,
-                    scaleMobile: 1.00,
-                    color: 0x6366f1,
-                    backgroundColor: 0x0a0a0f,
-                    spacing: 2.00,
-                    chaos: 3.00
-                });
+        window.addEventListener('load', function() {
+            function initVanta() {
+                if (typeof VANTA !== 'undefined' && typeof THREE !== 'undefined') {
+                    VANTA.TRUNK({
+                        el: "#vanta-trunk",
+                        THREE: THREE,
+                        mouseControls: true,
+                        touchControls: true,
+                        gyroControls: false,
+                        minHeight: 200.00,
+                        minWidth: 200.00,
+                        scale: 1.00,
+                        scaleMobile: 1.00,
+                        color: 0xa855f7,
+                        backgroundColor: 0x0a0a0f,
+                        spacing: 1.00,
+                        chaos: 2.50
+                    });
+                } else {
+                    setTimeout(initVanta, 100);
+                }
             }
+            initVanta();
         });
     </script>
 </body>
