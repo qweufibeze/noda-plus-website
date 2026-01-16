@@ -25,14 +25,17 @@
 /* Page Hero Section */
 .page-hero {
     padding: 180px 0 80px;
+    min-height: 420px;
     background: linear-gradient(180deg, rgba(10, 10, 15, 1) 0%, rgba(15, 15, 25, 1) 100%);
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
 }
 
 /* Page Hero with Vanta Animation */
 .page-hero-with-vanta {
-    min-height: 500px;
+    min-height: 420px;
 }
 
 .vanta-bg {
@@ -58,6 +61,10 @@
         radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.15), transparent),
         radial-gradient(ellipse 60% 40% at 80% 50%, rgba(168, 85, 247, 0.08), transparent);
     pointer-events: none;
+}
+
+.page-hero > .container {
+    width: 100%;
 }
 
 .page-hero-content {
@@ -174,10 +181,11 @@
 @media (max-width: 768px) {
     .page-hero {
         padding: 140px 0 60px;
+        min-height: 350px;
     }
 
     .page-hero-with-vanta {
-        min-height: 400px;
+        min-height: 350px;
     }
 
     .vanta-bg {
