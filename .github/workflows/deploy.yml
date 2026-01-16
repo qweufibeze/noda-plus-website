@@ -12,22 +12,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup server
+      - name: Prepare server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            # Install Caddy if not installed
-            if ! command -v caddy &> /dev/null; then
-              apt update
-              apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
-              curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
-              curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | tee /etc/apt/sources.list.d/caddy-stable.list
-              apt update
-              apt install -y caddy
-            fi
             mkdir -p /var/www/noda.plus
 
       - name: Copy site files
@@ -40,24 +31,12 @@ jobs:
           target: "/var/www/noda.plus"
           strip_components: 1
 
-      - name: Copy Caddyfile
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          source: "config/Caddyfile"
-          target: "/etc/caddy"
-          strip_components: 1
-
-      - name: Start Caddy
+      - name: Reload Caddy
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            chown -R caddy:caddy /var/www/noda.plus
             chmod -R 755 /var/www/noda.plus
-            systemctl enable caddy
-            systemctl restart caddy
+            docker exec anokhin-caddy caddy reload --config /etc/caddy/Caddyfile
