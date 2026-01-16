@@ -24,8 +24,8 @@
 
 /* Page Hero Section */
 .page-hero {
-    padding: 180px 0 80px;
-    min-height: 420px;
+    padding: 180px 0 100px;
+    min-height: 520px;
     background: linear-gradient(180deg, rgba(10, 10, 15, 1) 0%, rgba(15, 15, 25, 1) 100%);
     position: relative;
     overflow: hidden;
@@ -35,7 +35,7 @@
 
 /* Page Hero with Vanta Animation */
 .page-hero-with-vanta {
-    min-height: 420px;
+    min-height: 520px;
 }
 
 .vanta-bg {
@@ -180,11 +180,11 @@
 @media (max-width: 768px) {
     .page-hero {
         padding: 140px 0 60px;
-        min-height: 350px;
+        min-height: 400px;
     }
 
     .page-hero-with-vanta {
-        min-height: 350px;
+        min-height: 400px;
     }
 
     .page-hero-title {
