@@ -28,14 +28,6 @@
         <priority>0.9</priority>
     </url>
 
-    <!-- Страница Технологии -->
-    <url>
-        <loc>https://noda.plus/tech.html</loc>
-        <lastmod>2026-01-16</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
     <!-- Страница Процесс -->
     <url>
         <loc>https://noda.plus/process.html</loc>
