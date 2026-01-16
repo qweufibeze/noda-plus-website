@@ -23,15 +23,3 @@ jobs:
             -e "ssh -o StrictHostKeyChecking=no" \
             public/ \
             ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/var/www/noda.plus/
-
-      - name: Deploy Caddyfile and reload
-        env:
-          SSHPASS: ${{ secrets.SERVER_PASSWORD }}
-        run: |
-          sshpass -e scp -o StrictHostKeyChecking=no \
-            Caddyfile \
-            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/etc/caddy/Caddyfile
-
-          sshpass -e ssh -o StrictHostKeyChecking=no \
-            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} \
-            'caddy validate --config /etc/caddy/Caddyfile && caddy fmt --overwrite /etc/caddy/Caddyfile && systemctl reload caddy'
