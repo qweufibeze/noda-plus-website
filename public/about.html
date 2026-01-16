@@ -73,7 +73,7 @@
 
     <!-- Vanta.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.trunk.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.halo.min.js"></script>
 
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -390,12 +390,12 @@
     <!-- Main Script -->
     <script defer src="script.min.js?v=9"></script>
 
-    <!-- Vanta Trunk Init -->
+    <!-- Vanta Halo Init -->
     <script>
         window.addEventListener('load', function() {
             function initVanta() {
                 if (typeof VANTA !== 'undefined' && typeof THREE !== 'undefined') {
-                    VANTA.TRUNK({
+                    VANTA.HALO({
                         el: "#vanta-trunk",
                         THREE: THREE,
                         mouseControls: true,
@@ -403,12 +403,12 @@
                         gyroControls: false,
                         minHeight: 200.00,
                         minWidth: 200.00,
-                        scale: 1.00,
-                        scaleMobile: 1.00,
-                        color: 0xa855f7,
                         backgroundColor: 0x0a0a0f,
-                        spacing: 1.00,
-                        chaos: 2.50
+                        baseColor: 0x6366f1,
+                        size: 1.5,
+                        amplitudeFactor: 1.5,
+                        xOffset: 0.25,
+                        yOffset: 0.0
                     });
                 } else {
                     setTimeout(initVanta, 100);
