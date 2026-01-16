@@ -1,0 +1,39 @@
+# Caddy configuration for noda.plus
+# Automatic HTTPS via Let's Encrypt
+
+noda.plus, www.noda.plus {
+    # Redirect www to non-www
+    @www host www.noda.plus
+    redir @www https://noda.plus{uri} permanent
+
+    # Serve static files
+    root * /var/www/noda.plus
+    file_server
+
+    # Enable gzip compression
+    encode gzip
+
+    # Security headers
+    header {
+        X-Content-Type-Options nosniff
+        X-Frame-Options DENY
+        X-XSS-Protection "1; mode=block"
+        Referrer-Policy strict-origin-when-cross-origin
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    }
+
+    # Cache static assets
+    @static {
+        path *.css *.js *.png *.jpg *.jpeg *.gif *.svg *.ico *.woff *.woff2
+    }
+    header @static Cache-Control "public, max-age=31536000, immutable"
+
+    # Handle SPA routing (optional, for index.html fallback)
+    try_files {path} /index.html
+
+    # Logging
+    log {
+        output stdout
+        format console
+    }
+}
