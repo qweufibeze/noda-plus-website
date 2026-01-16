@@ -7,9 +7,9 @@
     left: 0;
     right: 0;
     z-index: 1000;
-    background: rgba(10, 10, 15, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(10, 10, 15, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -25,27 +25,36 @@
 /* Page Hero Section */
 .page-hero {
     padding: 180px 0 100px;
-    min-height: 520px;
+    height: 380px;
+    box-sizing: content-box;
     background: linear-gradient(180deg, rgba(10, 10, 15, 1) 0%, rgba(15, 15, 25, 1) 100%);
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     display: flex;
     align-items: center;
 }
 
 /* Page Hero with Vanta Animation */
 .page-hero-with-vanta {
-    min-height: 520px;
+    height: 380px;
+}
+
+/* Transparent header on pages with Vanta animation */
+.page-hero-with-vanta ~ .header-fixed,
+body:has(.page-hero-with-vanta) .header-fixed {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
 }
 
 .vanta-bg {
     position: absolute;
-    top: 0;
+    top: -180px;
     left: 0;
     right: 0;
-    bottom: 0;
     width: 100%;
-    height: 100%;
+    height: calc(100% + 180px);
     z-index: 0;
 }
 
@@ -86,6 +95,16 @@
     color: rgba(255, 255, 255, 0.7);
     max-width: 600px;
     line-height: 1.6;
+}
+
+/* Content sections after hero - should cover the hero when scrolling */
+.page-hero + .section,
+.page-hero ~ .section,
+.page-hero + section,
+.page-hero ~ section:not(.page-hero) {
+    position: relative;
+    z-index: 10;
+    background: #0a0a0f;
 }
 
 /* CTA Section */
@@ -180,11 +199,11 @@
 @media (max-width: 768px) {
     .page-hero {
         padding: 140px 0 60px;
-        min-height: 400px;
+        height: 300px;
     }
 
     .page-hero-with-vanta {
-        min-height: 400px;
+        height: 300px;
     }
 
     .page-hero-title {

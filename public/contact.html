@@ -50,6 +50,10 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 
+    <!-- Vanta.js (local) -->
+    <script src="js/three.min.js"></script>
+    <script src="js/vanta.net.min.js"></script>
+
     <!-- Schema.org Contact Page -->
     <script type="application/ld+json">
     {
@@ -115,7 +119,8 @@
 
     <main>
         <!-- Page Hero -->
-        <section class="page-hero">
+        <section class="page-hero page-hero-with-vanta">
+            <div class="vanta-bg" id="vanta-net"></div>
             <div class="container">
                 <div class="page-hero-content">
                     <span class="section-label">Контакты</span>
@@ -287,5 +292,60 @@
     </footer>
 
     <script defer src="script.min.js?v=9"></script>
+
+    <!-- Vanta Net Init + Parallax -->
+    <script>
+        window.addEventListener('load', function() {
+            function initVanta() {
+                if (typeof VANTA !== 'undefined' && typeof THREE !== 'undefined') {
+                    VANTA.NET({
+                        el: "#vanta-net",
+                        THREE: THREE,
+                        mouseControls: true,
+                        touchControls: true,
+                        gyroControls: false,
+                        minHeight: 200.00,
+                        minWidth: 200.00,
+                        scale: 1.00,
+                        scaleMobile: 1.00,
+                        color: 0x6366f1,
+                        backgroundColor: 0x0a0a0f,
+                        points: 10,
+                        maxDistance: 20,
+                        spacing: 15
+                    });
+                } else {
+                    setTimeout(initVanta, 100);
+                }
+            }
+            initVanta();
+
+            // Parallax effect
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+                gsap.to('.vanta-bg', {
+                    yPercent: 30,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '.page-hero',
+                        start: 'top top',
+                        end: 'bottom top',
+                        scrub: true
+                    }
+                });
+                gsap.to('.page-hero-content', {
+                    yPercent: 50,
+                    opacity: 0,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '.page-hero',
+                        start: 'top top',
+                        end: 'bottom top',
+                        scrub: true
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

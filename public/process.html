@@ -49,6 +49,11 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+
+    <!-- Vanta.js (local) -->
+    <script src="js/three.min.js"></script>
+    <script src="js/p5.min.js"></script>
+    <script src="js/vanta.topology.min.js"></script>
 </head>
 <body>
     <!-- Custom Cursor -->
@@ -95,7 +100,8 @@
 
     <main>
         <!-- Page Hero -->
-        <section class="page-hero">
+        <section class="page-hero page-hero-with-vanta">
+            <div class="vanta-bg" id="vanta-topology"></div>
             <div class="container">
                 <div class="page-hero-content">
                     <span class="section-label">Процесс</span>
@@ -345,5 +351,57 @@
     </footer>
 
     <script defer src="script.min.js?v=9"></script>
+
+    <!-- Vanta Topology Init + Parallax -->
+    <script>
+        window.addEventListener('load', function() {
+            function initVanta() {
+                if (typeof VANTA !== 'undefined' && typeof p5 !== 'undefined') {
+                    VANTA.TOPOLOGY({
+                        el: "#vanta-topology",
+                        p5: p5,
+                        mouseControls: true,
+                        touchControls: true,
+                        gyroControls: false,
+                        minHeight: 200.00,
+                        minWidth: 200.00,
+                        scale: 1.00,
+                        scaleMobile: 1.00,
+                        color: 0x6366f1,
+                        backgroundColor: 0x0a0a0f
+                    });
+                } else {
+                    setTimeout(initVanta, 100);
+                }
+            }
+            initVanta();
+
+            // Parallax effect
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+                gsap.to('.vanta-bg', {
+                    yPercent: 30,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '.page-hero',
+                        start: 'top top',
+                        end: 'bottom top',
+                        scrub: true
+                    }
+                });
+                gsap.to('.page-hero-content', {
+                    yPercent: 50,
+                    opacity: 0,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '.page-hero',
+                        start: 'top top',
+                        end: 'bottom top',
+                        scrub: true
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
