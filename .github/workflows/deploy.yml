@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Deploy to server
+      - name: Setup server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -28,37 +28,9 @@ jobs:
               apt update
               apt install -y caddy
             fi
-
-            # Create site directory
             mkdir -p /var/www/noda.plus
 
-            # Configure Caddy
-            cat > /etc/caddy/Caddyfile << 'EOF'
-            noda.plus {
-                root * /var/www/noda.plus
-                file_server
-                encode gzip
-
-                # SPA fallback
-                try_files {path} /index.html
-
-                # Cache static assets
-                @static {
-                    path *.css *.js *.png *.jpg *.jpeg *.gif *.svg *.ico *.woff *.woff2
-                }
-                header @static Cache-Control "public, max-age=31536000"
-            }
-
-            www.noda.plus {
-                redir https://noda.plus{uri} permanent
-            }
-            EOF
-
-            # Reload Caddy
-            systemctl enable caddy
-            systemctl reload caddy || systemctl start caddy
-
-      - name: Copy files to server
+      - name: Copy site files
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -68,7 +40,17 @@ jobs:
           target: "/var/www/noda.plus"
           strip_components: 1
 
-      - name: Set permissions
+      - name: Copy Caddyfile
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          source: "config/Caddyfile"
+          target: "/etc/caddy"
+          strip_components: 1
+
+      - name: Start Caddy
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -77,3 +59,5 @@ jobs:
           script: |
             chown -R caddy:caddy /var/www/noda.plus
             chmod -R 755 /var/www/noda.plus
+            systemctl enable caddy
+            systemctl restart caddy
