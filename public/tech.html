@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary SEO Meta Tags -->
+    <title>Технологии разработки | Noda+ — Swift, Kotlin, React, Node.js, Python</title>
+    <meta name="description" content="Технологический стек Noda+: Swift, Kotlin, Flutter, React Native, Node.js, Python, Go, React, Vue.js, Docker, Kubernetes, AWS. Современные технологии для вашего проекта.">
+    <meta name="keywords" content="технологии разработки, Swift, Kotlin, Flutter, React Native, Node.js, Python, Go, React, Vue.js, Docker, Kubernetes, AWS, GCP">
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="author" content="Noda+">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://noda.plus/tech.html">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0a0a0f">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://noda.plus/tech.html">
+    <meta property="og:site_name" content="Noda+">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:title" content="Технологии разработки | Noda+">
+    <meta property="og:description" content="Современный технологический стек для мобильной и веб-разработки">
+    <meta property="og:image" content="https://noda.plus/og-image.png">
+
+    <!-- Favicon & PWA -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+    <!-- Fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap"></noscript>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.min.css?v=16">
+    <link rel="stylesheet" href="styles-pages.css?v=1">
+
+    <!-- GSAP -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="custom-cursor"><div class="cursor-dot"></div></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <!-- Header -->
+    <header class="header header-fixed" id="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="logo">
+                    <span class="logo-text">Noda<span class="accent">+</span></span>
+                </a>
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item"><a href="about.html" class="nav-link">О нас</a></li>
+                    <li class="nav-item"><a href="services.html" class="nav-link">Услуги</a></li>
+                    <li class="nav-item"><a href="tech.html" class="nav-link active">Технологии</a></li>
+                    <li class="nav-item"><a href="process.html" class="nav-link">Процесс</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">Контакты</a></li>
+                </ul>
+                <a href="contact.html" class="btn btn-primary nav-cta">Обсудить проект</a>
+                <button class="burger" id="burger" aria-label="Меню">
+                    <span class="burger-line"></span>
+                    <span class="burger-line"></span>
+                    <span class="burger-line"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-content">
+            <ul class="mobile-nav">
+                <li><a href="about.html" class="mobile-nav-link">О нас</a></li>
+                <li><a href="services.html" class="mobile-nav-link">Услуги</a></li>
+                <li><a href="tech.html" class="mobile-nav-link active">Технологии</a></li>
+                <li><a href="process.html" class="mobile-nav-link">Процесс</a></li>
+                <li><a href="contact.html" class="mobile-nav-link">Контакты</a></li>
+            </ul>
+            <a href="contact.html" class="btn btn-primary btn-large">Обсудить проект</a>
+        </div>
+    </div>
+
+    <main>
+        <!-- Page Hero -->
+        <section class="page-hero">
+            <div class="container">
+                <div class="page-hero-content">
+                    <span class="section-label">Технологии</span>
+                    <h1 class="page-hero-title">
+                        Работаем с современным<br>
+                        <span class="gradient-text">технологическим стеком</span>
+                    </h1>
+                    <p class="page-hero-subtitle">
+                        Используем проверенные инструменты и следим за новыми технологиями
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack Section -->
+        <section class="section tech" id="tech">
+            <div class="container">
+                <div class="tech-tabs-wrapper">
+                    <div class="tech-tabs">
+                        <button class="tech-tab active" data-tab="mobile">Mobile</button>
+                        <button class="tech-tab" data-tab="backend">Backend</button>
+                        <button class="tech-tab" data-tab="frontend">Frontend</button>
+                        <button class="tech-tab" data-tab="devops">DevOps</button>
+                        <button class="tech-tab" data-tab="database">Database</button>
+                    </div>
+                </div>
+
+                <div class="tech-content">
+                    <div class="tech-panel active" data-panel="mobile">
+                        <div class="tech-grid">
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" alt="Swift">
+                                </div>
+                                <span class="tech-name">Swift</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin">
+                                </div>
+                                <span class="tech-name">Kotlin</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter">
+                                </div>
+                                <span class="tech-name">Flutter</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React Native">
+                                </div>
+                                <span class="tech-name">React Native</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xcode/xcode-original.svg" alt="SwiftUI">
+                                </div>
+                                <span class="tech-name">SwiftUI</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Jetpack Compose">
+                                </div>
+                                <span class="tech-name">Compose</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-panel" data-panel="backend">
+                        <div class="tech-grid">
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
+                                </div>
+                                <span class="tech-name">Node.js</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                                </div>
+                                <span class="tech-name">Python</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" alt="Go">
+                                </div>
+                                <span class="tech-name">Go</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                                </div>
+                                <span class="tech-name">Java</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg" alt="NestJS">
+                                </div>
+                                <span class="tech-name">NestJS</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI">
+                                </div>
+                                <span class="tech-name">FastAPI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-panel" data-panel="frontend">
+                        <div class="tech-grid">
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+                                </div>
+                                <span class="tech-name">React</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="Vue.js">
+                                </div>
+                                <span class="tech-name">Vue.js</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js">
+                                </div>
+                                <span class="tech-name">Next.js</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript">
+                                </div>
+                                <span class="tech-name">TypeScript</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind">
+                                </div>
+                                <span class="tech-name">Tailwind</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nuxtjs/nuxtjs-original.svg" alt="Nuxt">
+                                </div>
+                                <span class="tech-name">Nuxt</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-panel" data-panel="devops">
+                        <div class="tech-grid">
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker">
+                                </div>
+                                <span class="tech-name">Docker</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-original.svg" alt="Kubernetes">
+                                </div>
+                                <span class="tech-name">Kubernetes</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS">
+                                </div>
+                                <span class="tech-name">AWS</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="GCP">
+                                </div>
+                                <span class="tech-name">GCP</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform">
+                                </div>
+                                <span class="tech-name">Terraform</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" alt="Nginx">
+                                </div>
+                                <span class="tech-name">Nginx</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-panel" data-panel="database">
+                        <div class="tech-grid">
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">
+                                </div>
+                                <span class="tech-name">PostgreSQL</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB">
+                                </div>
+                                <span class="tech-name">MongoDB</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="Redis">
+                                </div>
+                                <span class="tech-name">Redis</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
+                                </div>
+                                <span class="tech-name">MySQL</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase">
+                                </div>
+                                <span class="tech-name">Firebase</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elasticsearch/elasticsearch-original.svg" alt="Elasticsearch">
+                                </div>
+                                <span class="tech-name">Elastic</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="cta-title">Нужна консультация по технологиям?</h2>
+                    <p class="cta-text">Поможем выбрать оптимальный стек для вашего проекта</p>
+                    <a href="contact.html" class="btn btn-primary btn-large">
+                        <span>Получить консультацию</span>
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <span class="logo-text">Noda<span class="accent">+</span></span>
+                    </a>
+                    <p class="footer-description">
+                        Создаём технологические продукты, которые меняют рынки и помогают бизнесу расти.
+                    </p>
+                </div>
+                <div class="footer-nav">
+                    <div class="footer-col">
+                        <h4 class="footer-title">Услуги</h4>
+                        <ul class="footer-links">
+                            <li><a href="services.html">Мобильная разработка</a></li>
+                            <li><a href="services.html">Backend-разработка</a></li>
+                            <li><a href="services.html">UI/UX дизайн</a></li>
+                            <li><a href="services.html">QA и тестирование</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4 class="footer-title">Компания</h4>
+                        <ul class="footer-links">
+                            <li><a href="about.html">О нас</a></li>
+                            <li><a href="process.html">Процесс</a></li>
+                            <li><a href="tech.html">Технологии</a></li>
+                            <li><a href="contact.html">Контакты</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4 class="footer-title">Контакты</h4>
+                        <ul class="footer-links">
+                            <li><a href="mailto:anokhinkm@yandex.ru">anokhinkm@yandex.ru</a></li>
+                            <li><a href="tel:+79804103007">+7 980 410 3007</a></li>
+                            <li><a href="https://t.me/kanokhinn" target="_blank">Telegram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2025 Noda+. Все права защищены.</p>
+                <div class="footer-legal">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script defer src="script.min.js?v=9"></script>
+</body>
+</html>
