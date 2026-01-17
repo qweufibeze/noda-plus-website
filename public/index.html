@@ -3,7 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105731676', 'ym');
+
+        ym(105731676, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/105731676" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
     <!-- Primary SEO Meta Tags -->
     <title>Разработка сайтов и мобильных приложений под ключ | Noda+ — Веб-студия</title>
     <meta name="description" content="Заказать разработку сайта или мобильного приложения под ключ ✓ 9+ лет опыта ✓ 217 проектов ✓ iOS, Android, Flutter ✓ Веб-сайты любой сложности ✓ UI/UX дизайн ✓ Бесплатная консультация">
@@ -77,9 +91,9 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 
-    <!-- Three.js & Vanta.js for 3D Globe Animation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+    <!-- Three.js & Vanta.js for 3D Globe Animation (loaded async) -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
 
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -462,25 +476,6 @@
     <!-- Main Script (deferred) -->
     <script defer src="script.min.js?v=9"></script>
 
-    <!-- Yandex.Metrika counter (deferred until browser idle) -->
-    <script type="text/javascript">
-        function loadYandexMetrika() {
-            (function(m,e,t,r,i,k,a){
-                m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-                m[i].l=1*new Date();
-                for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-                k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,k.fetchPriority='low',a.parentNode.insertBefore(k,a)
-            })(window, document,'script','https://mc.yandex.ru/metrika/tag.js', 'ym');
-            ym(105731676, 'init', {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, ecommerce:"dataLayer"});
-        }
-        // Load analytics after page is interactive (3s delay or on idle)
-        if ('requestIdleCallback' in window) {
-            requestIdleCallback(loadYandexMetrika, { timeout: 3000 });
-        } else {
-            setTimeout(loadYandexMetrika, 3000);
-        }
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/105731676" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 
     <!-- Cookie Consent Banner -->
     <div class="cookie-banner" id="cookie-banner">
